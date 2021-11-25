@@ -4,26 +4,28 @@
             <div id="login-column" class="col-md-5">
                 <div id="login-box" class="col-md-12 login">
                     <form id="login-form" class="form" action="" method="post">
-                        <h3 class="text-center text-info">Registro</h3>
+                        <h3 class="text-center text-info-label">Registro</h3>
                         <div class="form-group">
-                            <label for="nombre_completo" class="text-info">Nombre y apellidos:</label><br>
+                            <label for="nombre_completo" class="text-info-label">Nombre y apellidos:</label><br>
                             <input type="text" name="nombre_completo" id="nombre_completo" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="username" class="text-info">Usuario:</label><br>
+                            <label for="username" class="text-info-label">Usuario:</label><br>
                             <input type="text" name="username" id="username" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="password" class="text-info">Contraseña:</label><br>
-                            <input type="text" name="password" id="password" class="form-control">
+                            <label for="password" class="text-info-label">Contraseña:</label><br>
+                            <input type="password" name="password" id="password" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="confirmarPassword" class="text-info">Confirmar Contraseña:</label><br>
-                            <input type="text" name="confirmarPassword" id="confirmarPassword" class="form-control">
+                            <label for="confirmarPassword" class="text-info-label">Confirmar Contraseña:</label><br>
+                            <input type="password" name="confirmarPassword" id="confirmarPassword" class="form-control">
                         </div>
                         <div class="form-group">
-                            <label for="remember-me" class="text-info"><span><input id="remember-me" name="remember-me" type="checkbox"></span> <span class="ml-2">Recordarme</span></label><br>
-                            <input type="submit" name="submit" class="btn btn-info btn-md mt-1" value="Registrarme">
+                            <!-- <label for="remember-me" class="text-info-label"><span><input id="remember-me" name="remember-me" type="checkbox"></span> <span class="ml-2">Recordarme</span></label><br> -->
+                            <div class="d-grid gap-2 col-6 mx-auto">
+                                <input type="submit" name="submit" class="btn btn-outline-secondary btn-md mt-3" value="Registrarme">
+                            </div>
                         </div>
                     </form>
                 </div>
