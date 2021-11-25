@@ -138,7 +138,7 @@ export class TareaDetailComponent implements OnInit {
       this.crearRegistroBitacora(texto);
 
 
-      this.navigate("/");
+      this.navigate("/tareas");
 
     });
   }

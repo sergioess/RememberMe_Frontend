@@ -1,1 +1,27 @@
-<p>login-usuarios works!</p>
+<div class="container form-signin">
+  <div>
+    <h1 class="text-center">RememberMe</h1>
+    <h1 class="h3 mb-3 fw-normal">Inicio Sesión</h1>
+
+    <div class="form-floating">
+      <input type="email" [(ngModel)]="correo" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <label for="floatingInput">Correo Electrónico</label>
+    </div>
+    <div class="form-floating mt-2">
+      <input type="password" [(ngModel)]="passwordIngresado" class="form-control" id="floatingPassword"
+        placeholder="Password">
+      <label for="floatingPassword">Contraseña</label>
+    </div>
+
+    <!-- <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Remember me
+      </label>
+    </div> -->
+    <button mat-raised-button (click)="loginIntent()" color="primary" [mat-dialog-close]
+      class="text-center mt-2">Agregar</button>
+
+
+  </div>
+
+</div>

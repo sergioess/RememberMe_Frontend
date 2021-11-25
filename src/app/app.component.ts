@@ -9,4 +9,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'rememberme';
+
+  logout(): void {
+    sessionStorage.setItem('isLoggedIn', 'false');
+    sessionStorage.removeItem('token');
+  }
+
+
 }

@@ -124,7 +124,7 @@ export class ListaCategoriasComponent implements OnInit {
         this.categoriaService.removeCategoria(id).subscribe(categorias => {
 
           const lista = JSON.stringify(categorias);
-          // console.log("Respuesta despues Editar categoria: " + lista);
+          console.log("Respuesta despues Editar categoria: " + lista);
           this.traerCategorias(1);
 
         });

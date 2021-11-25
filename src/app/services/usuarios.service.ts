@@ -20,6 +20,12 @@ export class UsuariosService {
 
   }
 
+  getUsuarioByCorreo(email: string): Observable<Usuario[]> {
+    console.log(email);
+    return this.http.get<Usuario[]>(this.url + 'usuariosemail' + '/' + email);
+
+  }
+
   updateUsuario(id: number, data: Usuario): Observable<any> {
     return this.http.put(this.url + 'usuarios' + '/' + id, data);
   }
@@ -28,8 +34,9 @@ export class UsuariosService {
     return this.http.post(this.url + 'usuarios/', data);
   }
 
-  deleteUsuario(id: number): Observable<any> {
-    return this.http.delete(this.url + 'usuarios/' + id);
+  logout(): void {
+    localStorage.setItem('isLoggedIn', 'false');
+    localStorage.removeItem('token');
   }
 
 
