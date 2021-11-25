@@ -1,16 +1,16 @@
 <div class="container  p-0">
 
   <div class="text-center mb-0 mt-1 p-0">
-    <h1 class="p-0">Bitacora</h1>
+    <h1 class="p-0 m-0">Bitacora</h1>
   </div>
 
-  <div class="col-sm-12 col-md-8 col-lg-6 p-2 offset-md-2 offset-lg-3">
-
-    <mat-form-field appearance="standard" class="mt-0 pt-0">
-      <mat-label>Buscar</mat-label>
-      <input matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
-    </mat-form-field>
-
+  <div class="col-sm-12 col-md-8 col-lg-6 p-1 offset-md-2 offset-lg-3  m-0">
+    <div class="row">
+      <mat-form-field appearance="outline" class="mt-0 pt-0">
+        <mat-label>Buscar</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Buscar..." #input>
+      </mat-form-field>
+    </div>
 
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 

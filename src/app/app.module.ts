@@ -16,12 +16,15 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { BitacoraService } from './services/bitacora.service';
 import { CategoriasModule } from './categorias/categorias.module';
 import { LoginModule } from './auth/login/login.module';
+import { AboutComponent } from './components/about/about.component';
+import { ConfirmationDialogComponent } from './categorias/components/confirmation-dialog/confirmation-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
-    ],
+    AboutComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -40,6 +43,7 @@ import { LoginModule } from './auth/login/login.module';
     TareasServiceService,
     BitacoraService,
   ],
+  entryComponents: [ConfirmationDialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -23,3 +23,10 @@ table {
     color: #fff;
   }
 
+  a {
+    color: #FFFFFF;
+    text-decoration: none;
+  }
+  a:link, a:visited {
+    color: #FFFFFF;
+  }

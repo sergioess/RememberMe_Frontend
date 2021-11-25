@@ -19,16 +19,10 @@ const routes: Routes = [{
 {
   path: 'bitacora',
   component: ListaBitacoraComponent
-}
-  ,
+},
 {
   path: 'categorias',
   component: ListaCategoriasComponent
-
-},
-{
-  path: 'registro',
-  component: RegistroUsuariosComponent
 
 }
 ];
