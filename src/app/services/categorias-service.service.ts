@@ -9,6 +9,8 @@ import { HttpHeaders } from '@angular/common/http';
 })
 export class CategoriasServiceService {
 
+
+
   constructor(private http: HttpClient) { }
 
   url: string = 'https://remembermebackend.herokuapp.com/api/';

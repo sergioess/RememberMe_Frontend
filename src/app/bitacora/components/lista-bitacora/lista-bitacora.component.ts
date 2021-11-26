@@ -6,6 +6,9 @@ import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort';
 import { MatPaginator } from '@angular/material/paginator';
 
+//Proteger Rura
+import { UsuariosService } from '../../../services/usuarios.service';
+import { Router } from '@angular/router';
 
 
 const ELEMENT_DATA: Bitacora[] = [
@@ -26,7 +29,9 @@ export class ListaBitacoraComponent implements OnInit {
 
 
   displayedColumns: string[] = ['bcrea', 'bdes', 'titulo'];
-  constructor(private bitacoraService: BitacoraService) {
+  constructor(private bitacoraService: BitacoraService,
+    private usuarioService: UsuariosService,
+    private router: Router) {
     // this.dataSource = this.listaBitacora.slice();
   }
 
@@ -37,8 +42,12 @@ export class ListaBitacoraComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.traerBitacora(1);
-
+    if (this.usuarioService.isAuthenticated()) {
+      this.traerBitacora(1);
+    }
+    else {
+      this.navigate("/");
+    }
     //Reemplazar por id del usuario
   }
 
@@ -47,7 +56,7 @@ export class ListaBitacoraComponent implements OnInit {
     this.bitacoraService.getBitacora(id_usuario).subscribe(bitacoras => {
       this.listaBitacora = bitacoras;
       const lista = JSON.stringify(bitacoras);
-      console.log(lista);
+      // console.log(lista);
       this.dataSource = new MatTableDataSource(this.listaBitacora);
       this.dataSource.sort = this.sort;
       this.dataSource.paginator = this.paginator;
@@ -67,5 +76,11 @@ export class ListaBitacoraComponent implements OnInit {
       this.dataSource.paginator.firstPage();
     }
   }
+
+  navigate(ruta: string) {
+    // console.log(serie);
+    this.router.navigate([ruta]);
+  }
+
 
 }

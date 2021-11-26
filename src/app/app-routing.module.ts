@@ -7,6 +7,7 @@ import { ListaTareasComponent } from './tareas/components/lista-tareas/lista-tar
 import { AboutComponent } from './components/about/about.component';
 import { LoginUsuariosComponent } from './usuarios/components/login-usuarios/login-usuarios.component';
 import { AuthGuard } from './guards/auth.guard';
+import { RegistroUsuariosComponent } from './usuarios/components/registro-usuarios/registro-usuarios.component';
 
 const routes: Routes = [{
   path: '',
@@ -42,8 +43,12 @@ const routes: Routes = [{
 },
 {
   path: 'login',
-  component: LoginUsuariosComponent
-}
+  component: LoginUsuariosComponent, canActivate: [AuthGuard]
+},
+{
+  path: 'registro',
+  component: RegistroUsuariosComponent
+}, { path: '**', redirectTo: '/login' },
 ];
 
 @NgModule({

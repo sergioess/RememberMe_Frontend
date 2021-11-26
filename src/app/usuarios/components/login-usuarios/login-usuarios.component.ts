@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from '../../../services/usuarios.service';
 import { Router } from '@angular/router';
 import { Usuario } from '../../../models/usuario';
+import { Utils } from 'src/app/common/utils';
 
 @Component({
   selector: 'app-login-usuarios',
@@ -21,29 +22,43 @@ export class LoginUsuariosComponent implements OnInit {
 
   loginIntent() {
     // console.log(this.correo);
-    this.usuariosService.getUsuarioByCorreo(this.correo).subscribe(usuario => {
+    let userLoguear = new Usuario();
+    userLoguear.correo = this.correo;
+    userLoguear.password = this.passwordIngresado;
+
+    this.usuariosService.getUsuarioByCorreo(userLoguear).subscribe(usuario => {
       console.log(usuario[0]);
       const lista = JSON.stringify(usuario);
 
       // console.log("Pass BD" + usuario[0].password);
       // console.log("Pass Ingresado" + this.passwordIngresado);
 
-      if (this.passwordIngresado === usuario[0].password) {
-        console.log("Contraseña Correcta");
-        this.login(JSON.stringify(usuario[0]));
+      if (usuario === "true") {
+        this.login(usuario, this.correo);
       }
-      else {
-        console.log("Contraseña Incorrecta");
-      }
-      // console.log(lista);
+
+
 
     });
   }
 
-  login(token: string) {
+  login(token: string, email: string) {
+
+
+    this.usuariosService.getUsuarioByCorreoUser(email).subscribe(usuario => {
+      console.log(usuario);
+      const lista = JSON.stringify(usuario);
+
+      Utils.currentUser = usuario;
+    });
     sessionStorage.setItem('isLoggedIn', "true");
     sessionStorage.setItem('token', token);
     this.router.navigate(["tareas"]);
+  }
+
+  registrar() {
+    console.log("hey");
+    this.router.navigate(['/registro']);
   }
 
 }

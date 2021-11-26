@@ -5,7 +5,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { duration } from 'moment';
 import { BitacoraService } from 'src/app/services/bitacora.service';
 import { Bitacora } from '../../../models/bitacora';
+import { Categoria } from 'src/app/models/categoria';
+import { CategoriasServiceService } from 'src/app/services/categorias-service.service';
 
+//Proteger Rura
+import { UsuariosService } from '../../../services/usuarios.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -14,15 +19,27 @@ import { Bitacora } from '../../../models/bitacora';
   styleUrls: ['./lista-tareas.component.css']
 })
 export class ListaTareasComponent implements OnInit {
+  listaCategorias: Categoria[] = [];
   listaTareas: Tarea[] = [];
   tituloNuevaTarea: string = "";
   selected = 'none';
 
-  constructor(private tareaService: TareasServiceService, private _snackBar: MatSnackBar, private bitacoraService: BitacoraService) { }
+  constructor(private tareaService: TareasServiceService,
+    private _snackBar: MatSnackBar,
+    private bitacoraService: BitacoraService,
+    private categoriaService: CategoriasServiceService,
+    private usuarioService: UsuariosService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.traerTareas();
 
+    if (this.usuarioService.isAuthenticated()) {
+      this.traerTareas();
+      this.traerCategorias(1);
+    }
+    else {
+      this.navigate("/");
+    }
 
   }
 
@@ -73,6 +90,27 @@ export class ListaTareasComponent implements OnInit {
       bicacoraJustCreated = bitacora.body.tarea;
       console.log(bicacoraJustCreated)
     });
+
+
+
+
+  }
+
+  traerCategorias(id_usuario: number) {
+    console.log("entra traerCategorias");
+    this.categoriaService.getCategorias(id_usuario).subscribe(categorias => {
+      this.listaCategorias = categorias;
+      const lista = JSON.stringify(categorias);
+      // console.log(lista);
+
+    });
+
+  }
+
+
+  navigate(ruta: string) {
+    // console.log(serie);
+    this.router.navigate([ruta]);
   }
 
 }
