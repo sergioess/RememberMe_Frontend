@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { Categoria } from '../../../models/categoria';
 import { duration } from 'moment';
 import { CategoriasServiceService } from 'src/app/services/categorias-service.service';
-import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 import { MatTableDataSource } from '@angular/material/table';
@@ -13,6 +12,10 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 import { CategoriaFormComponent } from '../categoria-form/categoria-form.component';
+
+//Proteger Rura
+import { UsuariosService } from '../../../services/usuarios.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-lista-categorias',
@@ -30,10 +33,22 @@ export class ListaCategoriasComponent implements OnInit {
 
 
 
-  constructor(private categoriaService: CategoriasServiceService, private router: Router, private _snackBar: MatSnackBar, public dialog: MatDialog) { }
+  constructor(private categoriaService: CategoriasServiceService,
+    private router: Router,
+    private _snackBar: MatSnackBar,
+    public dialog: MatDialog,
+    private usuarioService: UsuariosService) { }
 
   ngOnInit(): void {
-    this.traerCategorias(1);
+
+    if (this.usuarioService.isAuthenticated()) {
+      this.traerCategorias(1);
+    }
+    else {
+      this.navigate("/");
+    }
+
+
   }
 
   traerCategorias(id_usuario: number) {
@@ -131,9 +146,5 @@ export class ListaCategoriasComponent implements OnInit {
       }
     });
   }
-
-
-
-
 
 }

@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from '../../../services/usuarios.service';
 import { Router } from '@angular/router';
 import { Usuario } from '../../../models/usuario';
-
-import * as bcrypt from 'bcryptjs';
+import { Utils } from 'src/app/common/utils';
 
 @Component({
   selector: 'app-login-usuarios',
@@ -23,44 +22,43 @@ export class LoginUsuariosComponent implements OnInit {
 
   loginIntent() {
     // console.log(this.correo);
-    this.usuariosService.getUsuarioByCorreo(this.correo).subscribe(usuario => {
+    let userLoguear = new Usuario();
+    userLoguear.correo = this.correo;
+    userLoguear.password = this.passwordIngresado;
+
+    this.usuariosService.getUsuarioByCorreo(userLoguear).subscribe(usuario => {
       console.log(usuario[0]);
       const lista = JSON.stringify(usuario);
 
       // console.log("Pass BD" + usuario[0].password);
       // console.log("Pass Ingresado" + this.passwordIngresado);
 
-
-      bcrypt.compare(req.body.password, user.password, function (err, res) {
-        if (err) {
-          // handle error
-        }
-        if (res)
-          // Send JWT
-        } else {
-        // response is OutgoingMessage object that server response http request
-        return response.json({ success: false, message: 'passwords do not match' });
+      if (usuario === "true") {
+        this.login(usuario, this.correo);
       }
-      });
 
 
 
-    if (this.passwordIngresado === usuario[0].password) {
-      console.log("Contraseña Correcta");
-      this.login(JSON.stringify(usuario[0]));
-    }
-    else {
-      console.log("Contraseña Incorrecta");
-    }
-    // console.log(lista);
+    });
+  }
 
-  });
-}
+  login(token: string, email: string) {
 
-login(token: string) {
-  sessionStorage.setItem('isLoggedIn', "true");
-  sessionStorage.setItem('token', token);
-  this.router.navigate(["tareas"]);
-}
+
+    this.usuariosService.getUsuarioByCorreoUser(email).subscribe(usuario => {
+      console.log(usuario);
+      const lista = JSON.stringify(usuario);
+
+      Utils.currentUser = usuario;
+    });
+    sessionStorage.setItem('isLoggedIn', "true");
+    sessionStorage.setItem('token', token);
+    this.router.navigate(["tareas"]);
+  }
+
+  registrar() {
+    console.log("hey");
+    this.router.navigate(['/registro']);
+  }
 
 }

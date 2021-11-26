@@ -1,9 +1,13 @@
 <mat-drawer-container>
-  <mat-drawer #drawer mode="over">
+  <mat-drawer #drawer mode="over" class="lateral">
     <mat-toolbar>
       <span>Menu</span>
-    </mat-toolbar>
+      <br>
 
+    </mat-toolbar>
+    <p class="text-primary">{{ datosUsuario.username }}</p>
+    <p class="text-primary">{{ datosUsuario.nombre_completo }}</p>
+    <p class="text-primary">{{ datosUsuario.correo }}</p>
   </mat-drawer>
 
   <mat-toolbar>
@@ -16,8 +20,9 @@
     <span>RememberMe</span>
     <span class="example-spacer"></span>
     <div>
-      <a mat-button [routerLink]="'login'" class="example-icon">Login</a>
-      <a mat-button class="example-icon" (click)="logout()">Logout</a>
+
+      <a mat-button [routerLink]="'login'" class="example-icon" *ngIf="validaUsuarioLogueado()">Login</a>
+      <a mat-button class="example-icon" (click)="logout()" *ngIf="!validaUsuarioLogueado()">Logout</a>
     </div>
 
   </mat-toolbar>

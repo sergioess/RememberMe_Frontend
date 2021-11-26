@@ -8,6 +8,9 @@ import { Bitacora } from '../../../models/bitacora';
 import { Categoria } from 'src/app/models/categoria';
 import { CategoriasServiceService } from 'src/app/services/categorias-service.service';
 
+//Proteger Rura
+import { UsuariosService } from '../../../services/usuarios.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -21,20 +24,30 @@ export class ListaTareasComponent implements OnInit {
   tituloNuevaTarea: string = "";
   selected = 'none';
 
-  constructor(private tareaService: TareasServiceService, private _snackBar: MatSnackBar, private bitacoraService: BitacoraService, private categoriaService: CategoriasServiceService) { }
+  constructor(private tareaService: TareasServiceService,
+    private _snackBar: MatSnackBar,
+    private bitacoraService: BitacoraService,
+    private categoriaService: CategoriasServiceService,
+    private usuarioService: UsuariosService,
+    private router: Router) { }
 
   ngOnInit(): void {
-    this.traerTareas();
-    this.traerCategorias(1);
 
+    if (this.usuarioService.isAuthenticated()) {
+      this.traerTareas();
+      this.traerCategorias(1);
+    }
+    else {
+      this.navigate("/");
+    }
 
   }
 
   traerTareas() {
     this.tareaService.getTareas().subscribe(tareas => {
-    this.listaTareas = tareas;
-    const lista = JSON.stringify(tareas);
-    // console.log(lista);
+      this.listaTareas = tareas;
+      const lista = JSON.stringify(tareas);
+      // console.log(lista);
 
     });
 
@@ -79,8 +92,8 @@ export class ListaTareasComponent implements OnInit {
     });
 
 
-    
-    
+
+
   }
 
   traerCategorias(id_usuario: number) {
@@ -88,10 +101,16 @@ export class ListaTareasComponent implements OnInit {
     this.categoriaService.getCategorias(id_usuario).subscribe(categorias => {
       this.listaCategorias = categorias;
       const lista = JSON.stringify(categorias);
-      console.log(lista);
-  
+      // console.log(lista);
+
     });
 
+  }
+
+
+  navigate(ruta: string) {
+    // console.log(serie);
+    this.router.navigate([ruta]);
   }
 
 }

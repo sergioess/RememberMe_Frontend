@@ -17,6 +17,7 @@ table {
 
   mat-drawer-container{
     background-color: #E8E8CC;
+
   }
 
   mat-toolbar{
@@ -30,4 +31,8 @@ table {
   }
   a:link, a:visited {
     color: #FFFFFF;
+  }
+
+  .lateral {
+    width: 300px;
   }
