@@ -7,6 +7,8 @@ import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Bitacora } from '../../../models/bitacora';
 import { BitacoraService } from 'src/app/services/bitacora.service';
+import { Categoria } from 'src/app/models/categoria';
+import { CategoriasServiceService } from 'src/app/services/categorias-service.service';
 
 
 
@@ -16,6 +18,8 @@ import { BitacoraService } from 'src/app/services/bitacora.service';
   styleUrls: ['./tarea-detail.component.css']
 })
 export class TareaDetailComponent implements OnInit {
+  listaCategorias: Categoria[] = [];
+  selected = 'none';
 
 
 
@@ -39,7 +43,7 @@ export class TareaDetailComponent implements OnInit {
   prioridadActualTarea: number = 0;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dateAdapter: DateAdapter<Date>, private tareaService: TareasServiceService,
-    private router: Router, private _snackBar: MatSnackBar, private bitacoraService: BitacoraService) {
+    private router: Router, private _snackBar: MatSnackBar, private bitacoraService: BitacoraService, private categoriaService: CategoriasServiceService) {
     this.dateAdapter.setLocale('es-CO'); //dd/MM/yyyy
   }
 
@@ -50,6 +54,7 @@ export class TareaDetailComponent implements OnInit {
     this.fechaLimiteDetalle = this.datoTarea.fechalimite;
     this.estadoActualTarea = this.datoTarea.estado;
     this.prioridadActualTarea = this.datoTarea.prioridad;
+    this.traerCategorias(1);
   }
 
   prioridad(priorSel: number): void {
@@ -182,6 +187,14 @@ export class TareaDetailComponent implements OnInit {
       }
     }
   }
-
+  traerCategorias(id_usuario: number) {
+    console.log("entra traerCategorias");
+    this.categoriaService.getCategorias(id_usuario).subscribe(categorias => {
+      this.listaCategorias = categorias;
+      const lista = JSON.stringify(categorias);
+      console.log(lista);
+  
+    });
+  }
 
 }

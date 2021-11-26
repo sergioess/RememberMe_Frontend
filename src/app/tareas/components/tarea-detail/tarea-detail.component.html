@@ -32,6 +32,15 @@
     </mat-form-field>
 
   </div>
+  <div class="row">
+    <mat-form-field appearance="fill">
+      <mat-label>Categoria</mat-label>
+      <mat-select [(value)]="selected" [(ngModel)]="datoTarea.id_clasificacion">
+        <mat-option>None</mat-option>
+        <mat-option *ngFor="let item of listaCategorias" [value]="item.id">{{item.descripcion}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
   <!-- <div class="form-floating mb-3 col-12">
     <input type="email" class="form-control" id="floatingInput" placeholder="Descriptión de la Tarea"
