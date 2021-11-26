@@ -35,9 +35,14 @@ export class UsuariosService {
   }
 
   logout(): void {
-    localStorage.setItem('isLoggedIn', 'false');
-    localStorage.removeItem('token');
+    sessionStorage.setItem('isLoggedIn', 'false');
+    sessionStorage.removeItem('token');
   }
+
+  isAuthenticated(): boolean {
+    console.log("Esta logueado : " + sessionStorage.getItem('isLoggedIn'));
+    return (sessionStorage.getItem('isLoggedIn') === "true") ? true : false;
+  };
 
 
 }
