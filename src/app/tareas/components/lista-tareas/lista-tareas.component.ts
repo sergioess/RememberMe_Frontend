@@ -7,6 +7,7 @@ import { BitacoraService } from 'src/app/services/bitacora.service';
 import { Bitacora } from '../../../models/bitacora';
 import { Categoria } from 'src/app/models/categoria';
 import { CategoriasServiceService } from 'src/app/services/categorias-service.service';
+import { Utils } from 'src/app/common/utils';
 
 //Proteger Rura
 import { UsuariosService } from '../../../services/usuarios.service';
@@ -101,7 +102,7 @@ export class ListaTareasComponent implements OnInit {
     this.categoriaService.getCategorias(id_usuario).subscribe(categorias => {
       this.listaCategorias = categorias;
       const lista = JSON.stringify(categorias);
-      // console.log(lista);
+      //console.log(lista);
 
     });
 

@@ -21,17 +21,47 @@ export class AppComponent implements OnInit {
 
 
   ngOnInit(): void {
-    setInterval(() => {
+    if (Utils.currentUser.id != 0) {
+      // setInterval(() => {
       this.datosUsuario = Utils.currentUser;
       // console.log(this.datosUsuario)
-    }, 1000)
+      // }, 1000)
+    }
+    else {
+      // console.log("Id igual a cero");
+      let texto: string | null = "";
+      texto = sessionStorage.getItem('user');
+
+      let numero: number = Number(texto);
+      numero = numero / 598;
+      numero = numero * 3;
+      numero = numero / 12;
+      // console.log("Id logueo guardado: " + numero);
+
+
+      this.usuarioService.getUsuariosById(numero).subscribe(usuario => {
+
+        const lista = JSON.stringify(usuario.id);
+
+        if (usuario) {
+          Utils.currentUser = usuario;
+          this.datosUsuario = Utils.currentUser;
+          // console.log("Usuario despues de refrescar" + usuario.correo);
+        }
+
+
+      });
+
+
+    }
+
 
   }
 
   logout(): void {
     sessionStorage.setItem('isLoggedIn', 'false');
     sessionStorage.removeItem('token');
-
+    sessionStorage.removeItem('user');
     this.navigate("/");
   }
 
@@ -50,6 +80,16 @@ export class AppComponent implements OnInit {
     else {
       return true;
     }
+  }
+
+  obtubeFoco() {
+    // console.log("El CLick");
+    if (this.usuarioService.isAuthenticated()) {
+
+      this.datosUsuario = Utils.currentUser;
+
+    }
+    // console.log(Utils.currentUser);
   }
 
 

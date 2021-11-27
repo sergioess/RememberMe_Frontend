@@ -21,6 +21,12 @@ export class UsuariosService {
 
   }
 
+  getUsuariosById(id: number): Observable<Usuario> {
+    return this.http.get<Usuario>(this.url + 'usuarios' + '/' + id);
+
+  }
+
+
   getUsuarioByCorreo(data: Usuario): Observable<any> {
     console.log(data);
     return this.http.post(this.url + 'usuariosemail', data);
@@ -50,7 +56,7 @@ export class UsuariosService {
 
 
   isAuthenticated(): boolean {
-    console.log("Esta logueado : " + sessionStorage.getItem('isLoggedIn'));
+    // console.log("Esta logueado : " + sessionStorage.getItem('isLoggedIn'));
     return (sessionStorage.getItem('isLoggedIn') === "true") ? true : false;
   };
 
