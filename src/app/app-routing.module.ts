@@ -43,12 +43,12 @@ const routes: Routes = [{
 },
 {
   path: 'login',
-  component: LoginUsuariosComponent
+  component: LoginUsuariosComponent, canActivate: [AuthGuard]
 },
 {
   path: 'registro',
   component: RegistroUsuariosComponent
-}
+}, { path: '**', redirectTo: '/login' },
 ];
 
 @NgModule({

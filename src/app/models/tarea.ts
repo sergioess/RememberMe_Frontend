@@ -7,5 +7,6 @@ export class Tarea {
   fechalimite: string = '';
   estado: number = 0;
   id_usuario: number=0;
+  id_clasificacion: number=0;
 
 }
