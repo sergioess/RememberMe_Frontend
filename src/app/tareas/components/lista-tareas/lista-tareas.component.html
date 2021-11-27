@@ -3,9 +3,9 @@
   <div class="row">
     <mat-form-field appearance="fill">
       <mat-label>Categoria</mat-label>
-      <mat-select [(value)]="selected" >
+      <mat-select [(value)]="selected" (selectionChange)="filtroCategorias($event.value)" [(ngModel)]="categoriaSeleccionada">
         <mat-option>None</mat-option>
-        <mat-option *ngFor="let item of listaCategorias" value="item.id">{{item.descripcion}}</mat-option>
+        <mat-option *ngFor="let item of listaCategorias" value="{{item.id}}">{{item.descripcion}}</mat-option>
       </mat-select>
     </mat-form-field>
   </div>
