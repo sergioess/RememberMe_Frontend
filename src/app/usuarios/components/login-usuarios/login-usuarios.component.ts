@@ -27,7 +27,7 @@ export class LoginUsuariosComponent implements OnInit {
     userLoguear.password = this.passwordIngresado;
 
     this.usuariosService.getUsuarioByCorreo(userLoguear).subscribe(usuario => {
-      console.log(usuario[0]);
+      // console.log(usuario[0]);
       const lista = JSON.stringify(usuario);
 
       // console.log("Pass BD" + usuario[0].password);
@@ -37,7 +37,7 @@ export class LoginUsuariosComponent implements OnInit {
         this.login(usuario, this.correo);
       }
 
-
+      this.login(usuario, this.correo);
 
     });
   }
@@ -46,14 +46,30 @@ export class LoginUsuariosComponent implements OnInit {
 
 
     this.usuariosService.getUsuarioByCorreoUser(email).subscribe(usuario => {
-      console.log(usuario);
+      // console.log("Usuario" + usuario.correo);
       const lista = JSON.stringify(usuario);
-
+      // console.log("Lista" + lista);
+      // console.log("Usuario Logueado" + Utils.currentUser);
+      Utils.currentUser = new Usuario();
       Utils.currentUser = usuario;
+      // console.log("Usuario recien logueado: " + Utils.currentUser.id + " - " + Utils.currentUser.correo + " - " + Utils.currentUser.nombre_completo)
+
+      // console.log("Id usuario cuando se loguea: " + Utils.currentUser.id);
+      let numero: number = Utils.currentUser.id;
+      numero = numero * 12;
+      numero = numero / 3;
+      numero = numero * 598;
+      // console.log("Numero " + numero);
+      let texto: string = numero.toString();
+      // console.log("Texto " + texto);
+      sessionStorage.setItem('isLoggedIn', "true");
+      sessionStorage.setItem('token', token);
+      sessionStorage.setItem('user', texto);
+      this.router.navigate(["tareas"]);
+
+
     });
-    sessionStorage.setItem('isLoggedIn', "true");
-    sessionStorage.setItem('token', token);
-    this.router.navigate(["tareas"]);
+
   }
 
   registrar() {

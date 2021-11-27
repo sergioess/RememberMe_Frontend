@@ -5,12 +5,27 @@
       <br>
 
     </mat-toolbar>
-    <p class="text-primary">{{ datosUsuario.username }}</p>
-    <p class="text-primary">{{ datosUsuario.nombre_completo }}</p>
-    <p class="text-primary">{{ datosUsuario.correo }}</p>
+
+    <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
+      <div class="card p-4">
+        <div class=" image d-flex flex-column justify-content-center align-items-center">
+
+          <img src="https://picsum.photos/300/300" class="rounded-circle border border-2 border-dark z-depth-2"
+            height="140" width="140">
+
+          <span class="name mt-3">{{datosUsuario.nombre_completo}}</span> <span
+            class="idd">{{datosUsuario.correo}}</span>
+          <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span class="idd1">{{
+              datosUsuario.username }}</span> <span><i class="fa fa-copy"></i></span> </div>
+
+        </div>
+      </div>
+    </div>
+
+
   </mat-drawer>
 
-  <mat-toolbar>
+  <mat-toolbar (click)="obtubeFoco()">
     <button mat-icon-button (click)="drawer.toggle()" class="example-icon"
       aria-label="Example icon-button with menu icon">
       <mat-icon>menu</mat-icon>

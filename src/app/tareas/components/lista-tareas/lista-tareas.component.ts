@@ -7,6 +7,7 @@ import { BitacoraService } from 'src/app/services/bitacora.service';
 import { Bitacora } from '../../../models/bitacora';
 import { Categoria } from 'src/app/models/categoria';
 import { CategoriasServiceService } from 'src/app/services/categorias-service.service';
+import { Utils } from 'src/app/common/utils';
 
 //Proteger Rura
 import { UsuariosService } from '../../../services/usuarios.service';
@@ -23,6 +24,7 @@ export class ListaTareasComponent implements OnInit {
   listaTareas: Tarea[] = [];
   tituloNuevaTarea: string = "";
   selected = 'none';
+  categoriaSeleccionada: number = 0;
 
   constructor(private tareaService: TareasServiceService,
     private _snackBar: MatSnackBar,
@@ -44,12 +46,13 @@ export class ListaTareasComponent implements OnInit {
   }
 
   traerTareas() {
-    this.tareaService.getTareas().subscribe(tareas => {
+    console.log(Utils.currentUser.id);
+    this.tareaService.getTareasUsuario(Utils.currentUser.id).subscribe(tareas => {
       this.listaTareas = tareas;
       const lista = JSON.stringify(tareas);
-      // console.log(lista);
-
-    });
+      console.log(lista);
+  
+      });
 
   }
   tareaRapida() {
@@ -101,7 +104,7 @@ export class ListaTareasComponent implements OnInit {
     this.categoriaService.getCategorias(id_usuario).subscribe(categorias => {
       this.listaCategorias = categorias;
       const lista = JSON.stringify(categorias);
-      // console.log(lista);
+      //console.log(lista);
 
     });
 
@@ -112,5 +115,32 @@ export class ListaTareasComponent implements OnInit {
     // console.log(serie);
     this.router.navigate([ruta]);
   }
+
+  filtroCategorias(categoria:number){
+  console.log(categoria);
+  
+  if(categoria == 1)
+  {
+    this.tareaService.getTareasUsuario(Utils.currentUser.id).subscribe(tareas => {
+      this.listaTareas = tareas;
+      const lista = JSON.stringify(tareas);
+      console.log(lista);
+  
+      });
+  }
+  else
+  {
+    let tareaCategoria: Tarea = new Tarea();
+    tareaCategoria.id_clasificacion = categoria;
+    tareaCategoria.id_usuario = Utils.currentUser.id;
+    this.tareaService.getTareasCategoria(tareaCategoria).subscribe(tareas => {
+    this.listaTareas = tareas;
+    const lista = JSON.stringify(tareas);
+    console.log(lista);
+
+    });
+  }
+  }
+ 
 
 }
