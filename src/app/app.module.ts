@@ -23,6 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginModule } from './auth/login/login.module';
 import { AboutComponent } from './components/about/about.component';
 import { ConfirmationDialogComponent } from './categorias/components/confirmation-dialog/confirmation-dialog.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { ConfirmationDialogComponent } from './categorias/components/confirmatio
     BrowserAnimationsModule,
     CategoriasModule,
     LoginModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     TareasServiceService,
