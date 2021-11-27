@@ -19,6 +19,13 @@ export class TareasServiceService {
 
   }
 
+  getTareasUsuario(id: number): Observable<Tarea[]> {
+    // console.log(this.http.get<Tarea[]>(this.url + '/tareas'))
+    // return this.items;
+    return this.http.get<Tarea[]>(this.url + 'tareasusuario' + '/' + id);
+
+  }
+
   updateTarea(id: number, data: Tarea): Observable<any> {
     return this.http.put(this.url + 'tareas' + '/' + id, data);
   }
