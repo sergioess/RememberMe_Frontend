@@ -15,7 +15,7 @@ import { CategoriasModule } from './categorias/categorias.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
 
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from "@angular/forms";
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import 'hammerjs';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -23,6 +23,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { LoginModule } from './auth/login/login.module';
 import { AboutComponent } from './components/about/about.component';
 import { ConfirmationDialogComponent } from './categorias/components/confirmation-dialog/confirmation-dialog.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,9 @@ import { ConfirmationDialogComponent } from './categorias/components/confirmatio
     FormsModule,
     BrowserAnimationsModule,
     CategoriasModule,
-    LoginModule
+    LoginModule,
+    ReactiveFormsModule,
+    ToastrModule.forRoot()
   ],
   providers: [
     TareasServiceService,
