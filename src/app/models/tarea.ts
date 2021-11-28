@@ -6,7 +6,8 @@ export class Tarea {
   prioridad: number = 0;
   fechalimite: string = '';
   estado: number = 0;
-  id_usuario: number=0;
-  id_clasificacion: number=0;
+  id_usuario: number = 0;
+  id_tablero: number = 0;
+  id_clasificacion: number = 0;
 
 }

@@ -3,8 +3,9 @@
   <div class="row">
     <mat-form-field appearance="fill">
       <mat-label>Categoria</mat-label>
-      <mat-select [(value)]="selected" (selectionChange)="filtroCategorias($event.value)" [(ngModel)]="categoriaSeleccionada">
-        <mat-option>None</mat-option>
+      <mat-select [(value)]="selected" (selectionChange)="filtroCategorias($event.value)"
+        [(ngModel)]="categoriaSeleccionada">
+        <mat-option value=0>None</mat-option>
         <mat-option *ngFor="let item of listaCategorias" value="{{item.id}}">{{item.descripcion}}</mat-option>
       </mat-select>
     </mat-form-field>
@@ -23,7 +24,7 @@
 
 </div>
 
-<div class=" page-footer  px-2 py-1 mt-2">
+<footer class="page-footer font-small purple pt-1 fixed-bottom px-1">
   <div class=" row p-0">
     <div class="form-floating col">
       <input [(ngModel)]="tituloNuevaTarea" type="text" class="form-control" id="floatingInput"
@@ -36,4 +37,4 @@
         class="text-center mt-2">Agregar</button>
     </div>
   </div>
-</div>
+</footer>

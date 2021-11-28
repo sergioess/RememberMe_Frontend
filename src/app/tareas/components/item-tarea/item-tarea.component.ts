@@ -99,5 +99,9 @@ export class ItemTareaComponent implements OnInit {
     return moment(date3).isBefore(date2);
   }
 
+  ngOnDestroy() {
+    this.dialog.closeAll;
+  }
+
 
 }

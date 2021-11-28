@@ -8,6 +8,7 @@ import { Bitacora } from '../../../models/bitacora';
 import { Categoria } from 'src/app/models/categoria';
 import { CategoriasServiceService } from 'src/app/services/categorias-service.service';
 import { Utils } from 'src/app/common/utils';
+import { ToastrService } from 'ngx-toastr';
 
 //Proteger Rura
 import { UsuariosService } from '../../../services/usuarios.service';
@@ -31,13 +32,14 @@ export class ListaTareasComponent implements OnInit {
     private bitacoraService: BitacoraService,
     private categoriaService: CategoriasServiceService,
     private usuarioService: UsuariosService,
-    private router: Router) { }
+    private router: Router,
+    private toastr: ToastrService) { }
 
   ngOnInit(): void {
 
     if (this.usuarioService.isAuthenticated()) {
       this.traerTareas();
-      this.traerCategorias(1);
+      this.traerCategorias(Utils.currentUser.id);
     }
     else {
       this.navigate("/");
@@ -46,13 +48,13 @@ export class ListaTareasComponent implements OnInit {
   }
 
   traerTareas() {
-    console.log(Utils.currentUser.id);
+    // console.log(Utils.currentUser.id);
     this.tareaService.getTareasUsuario(Utils.currentUser.id).subscribe(tareas => {
       this.listaTareas = tareas;
       const lista = JSON.stringify(tareas);
-      console.log(lista);
-  
-      });
+      // console.log(lista);
+
+    });
 
   }
   tareaRapida() {
@@ -60,7 +62,7 @@ export class ListaTareasComponent implements OnInit {
     let nuevaTarea = new Tarea();
     nuevaTarea.titulo = this.tituloNuevaTarea;
     nuevaTarea.descripcion = "";
-    nuevaTarea.id_usuario = 1;
+    nuevaTarea.id_usuario = Utils.currentUser.id;
     this.tareaService.createTarea(nuevaTarea).subscribe(tareas => {
 
       const lista = JSON.stringify(tareas);
@@ -71,7 +73,8 @@ export class ListaTareasComponent implements OnInit {
       tareaJustCreated = tareas.body.tarea;
       this.listaTareas.push(tareaJustCreated);
 
-      this._snackBar.open("Tarea Creada", 'Dismiss', { duration: 2000, verticalPosition: 'bottom', panelClass: ['red-snackbar'] });
+      this.toastr.success('Tarea Creada', 'Tareas');
+      // this._snackBar.open("Tarea Creada", 'Dismiss', { duration: 2000, verticalPosition: 'bottom', panelClass: ['red-snackbar'] });
 
       this.crearRegistroBitacora(tareaJustCreated);
 
@@ -83,15 +86,15 @@ export class ListaTareasComponent implements OnInit {
     let bitacoraNew = new Bitacora();
     bitacoraNew.descripcion = "Tarea Creada";
     bitacoraNew.id_tareas = tareaCreada.id;
-    bitacoraNew.id_usuario = 1;
+    bitacoraNew.id_usuario = Utils.currentUser.id;
 
     this.bitacoraService.createBitacora(bitacoraNew).subscribe(bitacora => {
 
       const lista = JSON.stringify(bitacora);
-      console.log(lista);
+      // console.log(lista);
       let bicacoraJustCreated = new Bitacora();
       bicacoraJustCreated = bitacora.body.tarea;
-      console.log(bicacoraJustCreated)
+      // console.log(bicacoraJustCreated)
     });
 
 
@@ -100,7 +103,7 @@ export class ListaTareasComponent implements OnInit {
   }
 
   traerCategorias(id_usuario: number) {
-    console.log("entra traerCategorias");
+    // console.log("entra traerCategorias");
     this.categoriaService.getCategorias(id_usuario).subscribe(categorias => {
       this.listaCategorias = categorias;
       const lista = JSON.stringify(categorias);
@@ -113,34 +116,34 @@ export class ListaTareasComponent implements OnInit {
 
   navigate(ruta: string) {
     // console.log(serie);
+    this.router.routeReuseStrategy.shouldReuseRoute = () => true;
+    this.router.onSameUrlNavigation = 'ignore';
     this.router.navigate([ruta]);
   }
 
-  filtroCategorias(categoria:number){
-  console.log(categoria);
-  
-  if(categoria == 1)
-  {
-    this.tareaService.getTareasUsuario(Utils.currentUser.id).subscribe(tareas => {
-      this.listaTareas = tareas;
-      const lista = JSON.stringify(tareas);
-      console.log(lista);
-  
-      });
-  }
-  else
-  {
-    let tareaCategoria: Tarea = new Tarea();
-    tareaCategoria.id_clasificacion = categoria;
-    tareaCategoria.id_usuario = Utils.currentUser.id;
-    this.tareaService.getTareasCategoria(tareaCategoria).subscribe(tareas => {
-    this.listaTareas = tareas;
-    const lista = JSON.stringify(tareas);
-    console.log(lista);
+  filtroCategorias(categoria: number) {
+    // console.log(categoria);
 
-    });
+    if (categoria == 0) {
+      this.tareaService.getTareasUsuario(Utils.currentUser.id).subscribe(tareas => {
+        this.listaTareas = tareas;
+        const lista = JSON.stringify(tareas);
+        // console.log(lista);
+
+      });
+    }
+    else {
+      let tareaCategoria: Tarea = new Tarea();
+      tareaCategoria.id_clasificacion = categoria;
+      tareaCategoria.id_usuario = Utils.currentUser.id;
+      this.tareaService.getTareasCategoria(tareaCategoria).subscribe(tareas => {
+        this.listaTareas = tareas;
+        const lista = JSON.stringify(tareas);
+        // console.log(lista);
+
+      });
+    }
   }
-  }
- 
+
 
 }

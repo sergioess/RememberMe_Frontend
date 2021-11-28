@@ -12,6 +12,7 @@ export class TareasServiceService {
 
   url: string = 'https://remembermebackend.herokuapp.com/api/';
   items: Tarea[] = [];
+
   getTareas(): Observable<Tarea[]> {
     // console.log(this.http.get<Tarea[]>(this.url + '/tareas'))
     // return this.items;
@@ -45,5 +46,12 @@ export class TareasServiceService {
     return this.http.get<Tarea[]>(this.url + 'tareasusuario' + '/' + id);
   }
 
+
+  getTareasTablero(id_tablero: number): Observable<Tarea[]> {
+    // console.log(this.http.get<Tarea[]>(this.url + '/tareas'))
+    // return this.items;
+    return this.http.get<Tarea[]>(this.url + 'tareastablero' + '/' + id_tablero);
+
+  }
 
 }

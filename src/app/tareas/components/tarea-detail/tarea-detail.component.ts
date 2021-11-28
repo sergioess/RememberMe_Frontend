@@ -9,6 +9,7 @@ import { Bitacora } from '../../../models/bitacora';
 import { BitacoraService } from 'src/app/services/bitacora.service';
 import { Categoria } from 'src/app/models/categoria';
 import { CategoriasServiceService } from 'src/app/services/categorias-service.service';
+import { Utils } from '../../../common/utils';
 
 
 
@@ -54,7 +55,7 @@ export class TareaDetailComponent implements OnInit {
     this.fechaLimiteDetalle = this.datoTarea.fechalimite;
     this.estadoActualTarea = this.datoTarea.estado;
     this.prioridadActualTarea = this.datoTarea.prioridad;
-    this.traerCategorias(1);
+    this.traerCategorias(Utils.currentUser.id);
   }
 
   prioridad(priorSel: number): void {
@@ -143,7 +144,7 @@ export class TareaDetailComponent implements OnInit {
       this.crearRegistroBitacora(texto);
 
 
-      this.navigate("/tareas");
+      this.router.navigateByUrl("tareas");
 
     });
   }
@@ -152,15 +153,15 @@ export class TareaDetailComponent implements OnInit {
     let bitacoraNew = new Bitacora();
     bitacoraNew.descripcion = texto;
     bitacoraNew.id_tareas = this.datoTarea.id;
-    bitacoraNew.id_usuario = 1;
+    bitacoraNew.id_usuario = Utils.currentUser.id;
 
     this.bitacoraService.createBitacora(bitacoraNew).subscribe(bitacora => {
 
       const lista = JSON.stringify(bitacora);
-      console.log(lista);
+      // console.log(lista);
       let bicacoraJustCreated = new Bitacora();
       bicacoraJustCreated = bitacora.body.tarea;
-      console.log(bicacoraJustCreated)
+      // console.log(bicacoraJustCreated)
     });
   }
 
@@ -168,13 +169,13 @@ export class TareaDetailComponent implements OnInit {
 
   navigate(ruta: string) {
     // console.log(serie);
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-    this.router.onSameUrlNavigation = 'reload';
+    this.router.routeReuseStrategy.shouldReuseRoute = () => true;
+    this.router.onSameUrlNavigation = 'ignore';
     this.router.navigate([ruta]);
   }
 
   eliminar() {
-    console.log("Click eliminar");
+    // console.log("Click eliminar");
     this._snackBar.open("Tarea Eliminada", 'Dismiss', { duration: 3000, verticalPosition: 'bottom', panelClass: ['red-snackbar'] });
     this.crearRegistroBitacora("Tarea Eliminada");
     this.navigate("/");
@@ -188,13 +189,15 @@ export class TareaDetailComponent implements OnInit {
     }
   }
   traerCategorias(id_usuario: number) {
-    console.log("entra traerCategorias");
+    // console.log("entra traerCategorias");
     this.categoriaService.getCategorias(id_usuario).subscribe(categorias => {
       this.listaCategorias = categorias;
       const lista = JSON.stringify(categorias);
-      console.log(lista);
-  
+      // console.log(lista);
+
     });
   }
+
+
 
 }

@@ -8,47 +8,18 @@ import { AboutComponent } from './components/about/about.component';
 import { LoginUsuariosComponent } from './usuarios/components/login-usuarios/login-usuarios.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RegistroUsuariosComponent } from './usuarios/components/registro-usuarios/registro-usuarios.component';
+import { DetailTableroComponent } from './tableros/components/detail-tablero/detail-tablero.component';
 
-const routes: Routes = [{
-  path: '',
-  component: LoginUsuariosComponent
-
-},
-{
-  path: 'tableros',
-  component: ListaTablerosComponent
-
-},
-{
-  path: 'bitacora', component: ListaBitacoraComponent, canActivate: [AuthGuard]
-},
-// {
-//   path: 'bitacora',
-//   component: ListaBitacoraComponent
-// },
-{
-  path: 'categorias',
-  component: ListaCategoriasComponent
-
-},
-{
-  path: 'about',
-  component: AboutComponent
-
-},
-{
-  path: 'tareas',
-  component: ListaTareasComponent
-
-},
-{
-  path: 'login',
-  component: LoginUsuariosComponent, canActivate: [AuthGuard]
-},
-{
-  path: 'registro',
-  component: RegistroUsuariosComponent
-}, { path: '**', redirectTo: '/login' },
+const routes: Routes = [{ path: '', component: LoginUsuariosComponent },
+{ path: 'tableros', component: ListaTablerosComponent },
+{ path: 'bitacora', component: ListaBitacoraComponent, canActivate: [AuthGuard] },
+{ path: 'categorias', component: ListaCategoriasComponent },
+{ path: 'about', component: AboutComponent },
+{ path: 'tareas', component: ListaTareasComponent },
+{ path: 'login', component: LoginUsuariosComponent },
+{ path: 'registro', component: RegistroUsuariosComponent },
+{ path: 'detalletablero', component: DetailTableroComponent },
+{ path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({

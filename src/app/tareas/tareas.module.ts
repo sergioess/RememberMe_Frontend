@@ -36,6 +36,9 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
   providers: [
     TareasServiceService
   ],
+  exports: [
+    ItemTareaComponent
+  ]
 
 })
 export class TareasModule { }

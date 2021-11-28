@@ -6,19 +6,27 @@
 
     </mat-toolbar>
 
-    <div class="container mt-4 mb-4 p-3 d-flex justify-content-center">
-      <div class="card p-4">
-        <div class=" image d-flex flex-column justify-content-center align-items-center">
+    <div class="container mt-4 mb-4 p-5 justify-content-center">
+      <div class="row">
+        <div class="card">
+          <div class=" image d-flex flex-column justify-content-center align-items-center">
 
-          <img src="https://picsum.photos/300/300" class="rounded-circle border border-2 border-dark z-depth-2"
-            height="140" width="140">
+            <img src="https://picsum.photos/300/300" class="rounded-circle border border-2 border-dark z-depth-2"
+              height="140" width="140">
 
-          <span class="name mt-3">{{datosUsuario.nombre_completo}}</span> <span
-            class="idd">{{datosUsuario.correo}}</span>
-          <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span class="idd1">{{
-              datosUsuario.username }}</span> <span><i class="fa fa-copy"></i></span> </div>
+            <span class="name mt-3">{{datosUsuario.nombre_completo}}</span> <span
+              class="idd">{{datosUsuario.correo}}</span>
+            <div class="d-flex flex-row justify-content-center align-items-center gap-2"> <span class="idd1">@{{
+                datosUsuario.username }}</span>
+            </div>
 
+          </div>
         </div>
+      </div>
+
+      <br>
+      <div class="row mt-2">
+        <a class="btn btn-primary" (click)="logout()" *ngIf="!validaUsuarioLogueado()">Logout</a>
       </div>
     </div>
 
@@ -37,7 +45,7 @@
     <div>
 
       <a mat-button [routerLink]="'login'" class="example-icon" *ngIf="validaUsuarioLogueado()">Login</a>
-      <a mat-button class="example-icon" (click)="logout()" *ngIf="!validaUsuarioLogueado()">Logout</a>
+
     </div>
 
   </mat-toolbar>

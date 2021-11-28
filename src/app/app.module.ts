@@ -24,6 +24,9 @@ import { LoginModule } from './auth/login/login.module';
 import { AboutComponent } from './components/about/about.component';
 import { ConfirmationDialogComponent } from './categorias/components/confirmation-dialog/confirmation-dialog.component';
 import { ToastrModule } from 'ngx-toastr';
+import { TablerosService } from './services/tableros.service';
+import { TablerosModule } from './tableros/tableros.module';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -32,11 +35,13 @@ import { ToastrModule } from 'ngx-toastr';
     AboutComponent,
   ],
   imports: [
+    RouterModule,
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     AngularMaterialModule,
     TareasModule,
+    TablerosModule,
     BitacoraModule,
     UsuariosModule,
     MatInputModule,
@@ -51,7 +56,8 @@ import { ToastrModule } from 'ngx-toastr';
   providers: [
     TareasServiceService,
     BitacoraService,
-    UsuariosService
+    UsuariosService,
+    TablerosService
   ],
   entryComponents: [ConfirmationDialogComponent],
   bootstrap: [AppComponent]

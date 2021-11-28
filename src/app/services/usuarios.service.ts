@@ -28,14 +28,14 @@ export class UsuariosService {
 
 
   getUsuarioByCorreo(data: Usuario): Observable<any> {
-    console.log(data);
+    // console.log(data);
     return this.http.post(this.url + 'usuariosemail', data);
 
   }
 
 
   getUsuarioByCorreoUser(email: string): Observable<Usuario> {
-    console.log(email);
+    // console.log(email);
     return this.http.get<Usuario>(this.url + 'usuariosemail/' + email);
 
   }

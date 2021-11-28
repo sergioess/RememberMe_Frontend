@@ -16,6 +16,7 @@ import { CategoriaFormComponent } from '../categoria-form/categoria-form.compone
 //Proteger Rura
 import { UsuariosService } from '../../../services/usuarios.service';
 import { Router } from '@angular/router';
+import { Utils } from 'src/app/common/utils';
 
 @Component({
   selector: 'app-lista-categorias',
@@ -41,11 +42,13 @@ export class ListaCategoriasComponent implements OnInit {
 
   ngOnInit(): void {
 
+    console.log("Esta autenticado: " + this.usuarioService.isAuthenticated())
+
     if (this.usuarioService.isAuthenticated()) {
-      this.traerCategorias(1);
+      this.traerCategorias(Utils.currentUser.id);
     }
     else {
-      this.navigate("/");
+      this.navigate("login");
     }
 
 
@@ -65,7 +68,7 @@ export class ListaCategoriasComponent implements OnInit {
 
 
   logData(row: any) {
-    console.log(row);
+    // console.log(row);
 
   }
 
@@ -82,7 +85,7 @@ export class ListaCategoriasComponent implements OnInit {
     // console.log(this.nuevacategoria);
     let newCategoria = new Categoria();
     newCategoria.descripcion = this.nombreCategoria;
-    newCategoria.id_usuario = 1;
+    newCategoria.id_usuario = Utils.currentUser.id;
     this.categoriaService.createCategoria(newCategoria).subscribe(categorias => {
 
       const lista = JSON.stringify(categorias);
@@ -96,14 +99,13 @@ export class ListaCategoriasComponent implements OnInit {
       this.dataSource = this.listaCategorias; */
       this._snackBar.open("Categoria Creada", 'Dismiss', { duration: 2000, verticalPosition: 'bottom', panelClass: ['red-snackbar'] });
       //this.navigate("categorias");
-      this.traerCategorias(1);
+      this.traerCategorias(Utils.currentUser.id);
 
     });
 
   }
   navigate(ruta: string) {
-    // console.log(serie);
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+    console.log(ruta);
     this.router.onSameUrlNavigation = 'reload';
     this.router.navigate([ruta]);
   }
@@ -123,7 +125,7 @@ export class ListaCategoriasComponent implements OnInit {
 
           const lista = JSON.stringify(categorias);
           // console.log("Respuesta despues Editar categoria: " + lista);
-          this.traerCategorias(1);
+          this.traerCategorias(Utils.currentUser.id);
 
         });
       }
@@ -131,7 +133,7 @@ export class ListaCategoriasComponent implements OnInit {
   }
 
   delete(id: any) {
-    console.log("El id: " + id);
+    // console.log("El id: " + id);
     const dialogRef = this.dialog.open(ConfirmationDialogComponent);
 
     dialogRef.afterClosed().subscribe(result => {
@@ -139,8 +141,8 @@ export class ListaCategoriasComponent implements OnInit {
         this.categoriaService.removeCategoria(id).subscribe(categorias => {
 
           const lista = JSON.stringify(categorias);
-          console.log("Respuesta despues Editar categoria: " + lista);
-          this.traerCategorias(1);
+          // console.log("Respuesta despues Editar categoria: " + lista);
+          this.traerCategorias(Utils.currentUser.id);
 
         });
       }

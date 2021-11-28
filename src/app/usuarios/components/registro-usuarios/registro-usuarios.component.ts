@@ -13,11 +13,11 @@ import { Usuario } from '../../../models/usuario';
 export class RegistroUsuariosComponent implements OnInit {
 
   usuarioForm: FormGroup;
-  
+
   constructor(private usuariosService: UsuariosService,
-              private fb: FormBuilder,
-              private router: Router,
-              private toastr: ToastrService) { 
+    private fb: FormBuilder,
+    private router: Router,
+    private toastr: ToastrService) {
     this.usuarioForm = this.fb.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -30,11 +30,11 @@ export class RegistroUsuariosComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  registrarUsuario(){
+  registrarUsuario() {
 
     let password1: string = this.usuarioForm.get('password')?.value;
     let password2: string = this.usuarioForm.get('confirmar_password')?.value;
-    
+
     if (password1 === password2) {
 
       const USUARIO: Usuario = {
@@ -47,18 +47,18 @@ export class RegistroUsuariosComponent implements OnInit {
       }
 
       this.usuariosService.createUsuario(USUARIO).subscribe(usuario => {
-        console.log(USUARIO);
+        // console.log(USUARIO);
         const lista = JSON.stringify(USUARIO);
-        console.log(lista);
+        // console.log(lista);
 
       });
-      
+
       this.toastr.success('El usuario se registro de manera exitosa', 'Registro exitoso!');
       this.router.navigate(['/']);
 
     } //cierre del if
-    else{
-      this.toastr.success('Las contraseñas no coinciden', 'Contraseña errada!');
+    else {
+      this.toastr.error('Las contraseñas no coinciden', 'Contraseña errada!');
     }
 
   }

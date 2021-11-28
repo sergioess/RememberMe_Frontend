@@ -1,0 +1,47 @@
+<div class="container">
+  <mat-card class="example-card my-2">
+
+    <div class="row ">
+      <div class="col align-self-start ">
+        <mat-card-title-group>
+          <mat-card-title>{{detalleTablero.titulo}}</mat-card-title>
+          <mat-card-subtitle>{{detalleTablero.descripcion}}</mat-card-subtitle>
+        </mat-card-title-group>
+      </div>
+      <div class="col-auto p-0 me-2 ">
+
+      </div>
+    </div>
+
+    <mat-card-content>
+
+      <div class="border">
+        <div class="row">
+          <div class="col">
+            <span class="ms-1">Colaboradores</span>
+          </div>
+          <div class="col-auto p-0 me-3 ">
+            <div class="text-end p-0 text-success">
+              <mat-icon>person_add</mat-icon>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+      <div mat-dialog-actions class="row justify-content-center mt-0 mb-1">
+
+        <button mat-flat-button color="primary" [mat-dialog-close] class="py-0 ">Actualizar</button>
+        <button mat-flat-button color="accent" class="py-0 mt-3" (click)="regresar()">Regresar</button>
+
+
+      </div>
+    </mat-card-content>
+  </mat-card>
+
+</div>
+
+
+
+
+{{ detalleTablero | json }}

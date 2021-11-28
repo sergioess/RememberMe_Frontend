@@ -9,11 +9,8 @@ import { MatPaginator } from '@angular/material/paginator';
 //Proteger Rura
 import { UsuariosService } from '../../../services/usuarios.service';
 import { Router } from '@angular/router';
+import { Utils } from '../../../common/utils';
 
-
-const ELEMENT_DATA: Bitacora[] = [
-  { id: 1, descripcion: 'Hydrogen', id_usuario: 1, id_tareas: 1, create_at: "" },
-];
 
 @Component({
   selector: 'app-lista-bitacora',
@@ -43,7 +40,7 @@ export class ListaBitacoraComponent implements OnInit {
   ngOnInit(): void {
 
     if (this.usuarioService.isAuthenticated()) {
-      this.traerBitacora(1);
+      this.traerBitacora(Utils.currentUser.id);
     }
     else {
       this.navigate("/");
@@ -64,7 +61,7 @@ export class ListaBitacoraComponent implements OnInit {
   }
 
   logData(row: any) {
-    console.log(row);
+    // console.log(row);
 
   }
 
