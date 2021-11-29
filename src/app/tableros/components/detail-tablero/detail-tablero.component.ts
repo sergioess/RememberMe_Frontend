@@ -149,7 +149,9 @@ export class BottomSheetOverviewExampleSheet implements OnInit {
   selected: number = 0;
 
   constructor(private _bottomSheetRef: MatBottomSheetRef<BottomSheetOverviewExampleSheet>,
-    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any) { }
+    @Inject(MAT_BOTTOM_SHEET_DATA) public data: any,
+    private tablerosService: TablerosService,
+    private router: Router,) { }
 
   ngOnInit(): void {
     const lista = JSON.stringify(this.data.dato);
@@ -167,6 +169,20 @@ export class BottomSheetOverviewExampleSheet implements OnInit {
   }
 
   save() {
+    let colaboradorTablero: TableroColaborador = new TableroColaborador();
+    colaboradorTablero.rol = this.elRol;
+
+    this.tablerosService.updateRolColaborador(this.data.dato.id, colaboradorTablero).subscribe(coltablero => {
+
+      const lista = JSON.stringify(coltablero);
+      console.log(lista);
+      // this.crearRegistroBitacora("Tarea Actualizada");
+
+
+      // this.router.navigateByUrl("tareas");
+      this._bottomSheetRef.dismiss();
+
+    });
 
 
   }

@@ -73,7 +73,7 @@ export class ListaTareasComponent implements OnInit {
       tareaJustCreated = tareas.body.tarea;
       this.listaTareas.push(tareaJustCreated);
 
-      this.toastr.success('Tarea Creada', 'Tareas');
+      this.toastr.success('Tarea Creada', 'Tareas', { positionClass: 'toast-top-center' });
       // this._snackBar.open("Tarea Creada", 'Dismiss', { duration: 2000, verticalPosition: 'bottom', panelClass: ['red-snackbar'] });
 
       this.crearRegistroBitacora(tareaJustCreated);

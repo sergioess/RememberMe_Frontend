@@ -45,5 +45,9 @@ export class TablerosService {
 
   }
 
+  updateRolColaborador(id: number, data: TableroColaborador): Observable<any> {
+    return this.http.put(this.url + 'updaterolcol' + '/' + id, data);
+  }
+
 
 }

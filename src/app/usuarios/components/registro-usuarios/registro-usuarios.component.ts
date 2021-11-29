@@ -53,12 +53,12 @@ export class RegistroUsuariosComponent implements OnInit {
 
       });
 
-      this.toastr.success('El usuario se registro de manera exitosa', 'Registro exitoso!');
+      this.toastr.success('El usuario se registro de manera exitosa', 'Registro exitoso!', { positionClass: 'toast-top-center' });
       this.router.navigate(['/']);
 
     } //cierre del if
     else {
-      this.toastr.error('Las contraseñas no coinciden', 'Contraseña errada!');
+      this.toastr.error('Las contraseñas no coinciden', 'Contraseña errada!', { positionClass: 'toast-top-center' });
     }
 
   }
