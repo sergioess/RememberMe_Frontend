@@ -6,7 +6,12 @@ import { TareasServiceService } from '../services/tareas-service.service';
 import { BitacoraService } from '../services/bitacora.service';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { TareasModule } from '../tareas/tareas.module';
-import { DetailTableroComponent } from './components/detail-tablero/detail-tablero.component';
+import { BottomSheetOverviewExampleSheet, DetailTableroComponent } from './components/detail-tablero/detail-tablero.component';
+import { ConfirmatioDelColaComponent } from './components/confirmatio-del-cola/confirmatio-del-cola.component';
+
+import { FormsModule } from "@angular/forms";
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
@@ -14,13 +19,18 @@ import { DetailTableroComponent } from './components/detail-tablero/detail-table
   declarations: [
     ListaTablerosComponent,
     ItemTablerosComponent,
-    DetailTableroComponent
+    DetailTableroComponent,
+    ConfirmatioDelColaComponent,
+    BottomSheetOverviewExampleSheet
 
   ],
   imports: [
     CommonModule,
     AngularMaterialModule,
-    TareasModule
+    TareasModule,
+    FormsModule,
+    MatInputModule,
+    MatFormFieldModule
   ]
 })
 export class TablerosModule { }

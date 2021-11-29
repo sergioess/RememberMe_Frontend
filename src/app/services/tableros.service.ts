@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Tablero } from '../models/tablero';
 import { Tarea } from '../models/tarea';
+import { TableroColaborador } from '../models/tablero-colaborador';
 
 
 
@@ -26,7 +27,23 @@ export class TablerosService {
 
   }
 
+  getColaboradoesTablero(id_tablero: number): Observable<TableroColaborador[]> {
+    // console.log(this.http.get<Tarea[]>(this.url + '/tareas'))
+    // return this.items;
+    return this.http.get<TableroColaborador[]>(this.url + 'tablerocolabora' + '/' + id_tablero);
 
+  }
+
+  removeColaborador(id: number): Observable<TableroColaborador> {
+    // console.log(this.http.get<Tarea[]>(this.url + '/tareas'))
+    // return this.items;
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+
+    };
+    return this.http.delete<TableroColaborador>(this.url + 'removecolabora' + '/' + id);
+
+  }
 
 
 }

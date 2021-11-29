@@ -25,7 +25,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatMenuModule } from '@angular/material/menu';
-
+import { MatBottomSheetModule } from '@angular/material/bottom-sheet';
 
 
 
@@ -56,7 +56,8 @@ import { MatMenuModule } from '@angular/material/menu';
     MatPaginatorModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatMenuModule
+    MatMenuModule,
+    MatBottomSheetModule,
   ]
   , exports: [
     MatCardModule,
@@ -82,7 +83,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatPaginatorModule,
     MatToolbarModule,
     MatSidenavModule,
-    MatMenuModule
+    MatMenuModule,
+    MatBottomSheetModule,
+
   ]
 })
 export class AngularMaterialModule { }
