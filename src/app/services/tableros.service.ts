@@ -49,5 +49,16 @@ export class TablerosService {
     return this.http.put(this.url + 'updaterolcol' + '/' + id, data);
   }
 
+  createTableroColaborador(data: TableroColaborador): Observable<any> {
+
+    // console.log(data.id_colaborador);
+    // console.log(data.id_tablero);
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+
+    };
+    return this.http.post(this.url + 'tablero_colaboradores/', data);
+  }
+
 
 }

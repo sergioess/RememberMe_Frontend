@@ -28,6 +28,8 @@ import { TablerosService } from './services/tableros.service';
 import { TablerosModule } from './tableros/tableros.module';
 import { RouterModule } from '@angular/router';
 
+import { ModalModule } from 'ngx-bootstrap/modal';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +53,8 @@ import { RouterModule } from '@angular/router';
     CategoriasModule,
     LoginModule,
     ReactiveFormsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    ModalModule.forRoot()
   ],
   providers: [
     TareasServiceService,

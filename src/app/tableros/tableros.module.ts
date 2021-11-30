@@ -15,6 +15,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
 
 
+
 @NgModule({
   declarations: [
     ListaTablerosComponent,
@@ -30,7 +31,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     TareasModule,
     FormsModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
   ]
 })
 export class TablerosModule { }

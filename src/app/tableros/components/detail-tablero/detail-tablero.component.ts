@@ -1,4 +1,4 @@
-import { Component, Inject, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, Inject, Input, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { TablerosService } from '../../../services/tableros.service';
 import { Tablero } from '../../../models/tablero';
 import { Router } from '@angular/router';
@@ -17,6 +17,10 @@ import { MAT_BOTTOM_SHEET_DATA } from '@angular/material/bottom-sheet';
 
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { UsuariosService } from '../../../services/usuarios.service';
+
+
 
 
 
@@ -30,6 +34,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 export class DetailTableroComponent implements OnInit {
 
+  // Datos en la ventana modal
+  modalRef?: BsModalRef;
+  nuevoColaborador: string = "";
 
   listaColaboradores: TableroColaborador[] = [];
   detalleTablero!: Tablero;
@@ -44,11 +51,14 @@ export class DetailTableroComponent implements OnInit {
   constructor(private tablerosService: TablerosService,
     private router: Router,
     public dialog: MatDialog,
-    private _bottomSheet: MatBottomSheet
+    private _bottomSheet: MatBottomSheet,
+    private modalService: BsModalService,
+    private usuariosService: UsuariosService
   ) { }
 
 
   ngOnInit(): void {
+    console.log("Reload: " + JSON.stringify(this.tablerosService.tableroPasaDetail));
     this.detalleTablero = this.tablerosService.tableroPasaDetail;
     console.log("Detalle Tablero" + this.detalleTablero);
     this.TraeColaboradores();
@@ -129,6 +139,47 @@ export class DetailTableroComponent implements OnInit {
     });
   }
 
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+
+  // metodo de aceptar en la ventana modal para crear colaborador
+  confirm() {
+    let agregaColaborador: TableroColaborador = new TableroColaborador();
+
+    //traer el id del usuario
+    this.usuariosService.getUsuarioByCorreoUser(this.nuevoColaborador).subscribe(usuario => {
+
+      const usuarioColaborador = JSON.stringify(usuario);
+      // console.log("Usuario Colaborador: " + usuarioColaborador);
+
+      //creo el registro de colaborador
+      agregaColaborador.aceptado = false;
+      agregaColaborador.id_colaborador = usuario.id
+      agregaColaborador.rol = 1
+      agregaColaborador.id_tablero = this.detalleTablero.id
+
+
+      this.tablerosService.createTableroColaborador(agregaColaborador).subscribe(tablero => {
+
+        // const lista = JSON.stringify(tablero);
+        // console.log(tareas.body.tarea);
+
+        this.ngOnInit();
+
+      });
+
+    });
+
+
+
+    //Agregar el colaborador
+
+  }
+
+  decline() {
+
+  }
 
 }
 
@@ -178,9 +229,10 @@ export class BottomSheetOverviewExampleSheet implements OnInit {
       console.log(lista);
       // this.crearRegistroBitacora("Tarea Actualizada");
 
-
       // this.router.navigateByUrl("tareas");
       this._bottomSheetRef.dismiss();
+      this.tablerosService.tableroPasaDetail = this.data.dato;
+      location.reload();
 
     });
 

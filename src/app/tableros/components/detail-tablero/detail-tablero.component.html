@@ -22,7 +22,8 @@
           </div>
           <div class="col-auto p-0 me-3 ">
             <div class="text-end p-0 text-success">
-              <mat-icon>person_add</mat-icon>
+
+              <mat-icon (click)="openModal(template)">person_add</mat-icon>
             </div>
           </div>
         </div>
@@ -92,6 +93,23 @@
 </div>
 
 
+
+<!-- <pre class="card card-block card-header">Agregar Colaborador</pre> -->
+<ng-template #template>
+  <div class="modal-body ">
+    <p>Agregar Colaborador</p>
+    <mat-form-field>
+      <mat-label>Correo Colaborador</mat-label>
+      <input matInput type="text" [(ngModel)]="nuevoColaborador">
+      <button matSuffix mat-icon-button aria-label="Clear">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <br>
+    <button type="button" class="btn btn-primary pull-right" (click)="confirm()">Agregar</button>
+    <!-- <button type="button" class="btn btn-primary" (click)="decline()">No</button> -->
+  </div>
+</ng-template>
 
 
 {{ detalleTablero | json }}
