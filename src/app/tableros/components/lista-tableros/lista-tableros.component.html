@@ -3,5 +3,31 @@
   <app-item-tableros *ngFor="let item of listaTableros" [item]="item" class="mb-0  ">
 
   </app-item-tableros>
+        <button mat-mini-fab class ="md-fab-bottom-right fixed-bottom pull-right" 
+        color="accent" (click)="openModal(template)" saria-label="Example icon button with a plus one icon">
+          <mat-icon>plus_one</mat-icon>
+        </button>
 
 </div>
+<ng-template #template>
+  <div class="modal-body ">
+    <p>Nuevo Tablero</p>
+    <mat-form-field>
+      <mat-label>Titulo</mat-label>
+      <input matInput type="text" [(ngModel)]="tituloTablero">
+      <button matSuffix mat-icon-button aria-label="Clear">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Descripcion</mat-label>
+      <input matInput type="text" [(ngModel)]="descripcionTablero">
+      <button matSuffix mat-icon-button aria-label="Clear">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+    <br>
+    <button type="button" class="btn btn-primary pull-right" (click)="confirm()">Agregar</button>
+   
+  </div>
+</ng-template>
