@@ -8,22 +8,24 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { ConfirmationDialogComponent } from './components/confirmation-dialog/confirmation-dialog.component';
 import { CategoriaFormComponent } from './components/categoria-form/categoria-form.component';
-
-
+import { BitacoraModule } from '../bitacora/bitacora.module';
+//import { ListaBitacoraComponent } from '../bitacora/components/lista-bitacora/lista-bitacora.component';
 
 @NgModule({
   declarations: [
     ListaCategoriasComponent,
     ItemCategoriasComponent,
     ConfirmationDialogComponent,
-    CategoriaFormComponent
+    CategoriaFormComponent,
+    //ListaBitacoraComponent
   ],
   imports: [
     CommonModule,
     AngularMaterialModule,
     FormsModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    BitacoraModule
   ]
 })
 export class CategoriasModule { }

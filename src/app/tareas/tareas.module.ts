@@ -11,6 +11,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { ScrollingModule } from '@angular/cdk/scrolling';
+import { BitacoraModule } from '../bitacora/bitacora.module';
 
 
 
@@ -31,7 +32,8 @@ import { ScrollingModule } from '@angular/cdk/scrolling';
     AngularMaterialModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    ScrollingModule
+    ScrollingModule,
+    BitacoraModule
   ],
   providers: [
     TareasServiceService
