@@ -59,6 +59,15 @@ export class TablerosService {
     };
     return this.http.post(this.url + 'tablero_colaboradores/', data);
   }
+  createTablero(data: Tablero): Observable<any> {
+
+    
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+
+    };
+    return this.http.post(this.url + 'tablero/', data);
+  }
 
 
 }

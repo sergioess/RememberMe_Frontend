@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Tablero } from 'src/app/models/tablero';
 
 import { UsuariosService } from '../../../services/usuarios.service';
 import { Utils } from '../../../common/utils';
 import { TablerosService } from 'src/app/services/tableros.service';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 
 @Component({
@@ -13,11 +14,16 @@ import { TablerosService } from 'src/app/services/tableros.service';
 })
 export class ListaTablerosComponent implements OnInit {
 
+   // Datos en la ventana modal
+  modalRef?: BsModalRef;
+  tituloTablero: string="";
+  descripcionTablero: string="";
+
   listaTableros: Tablero[] = [];
 
 
   constructor(private tableroService: TablerosService,
-    private usuarioService: UsuariosService) { }
+    private usuarioService: UsuariosService, private modalService: BsModalService,) { }
 
   ngOnInit(): void {
 
@@ -40,6 +46,22 @@ export class ListaTablerosComponent implements OnInit {
       console.log(lista);
 
     });
+  }
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
+  }
+  confirm(){
+    let nuevoTablero: Tablero=new Tablero();
+    nuevoTablero.id_usuario=Utils.currentUser.id;
+    nuevoTablero.titulo=this.tituloTablero;
+    nuevoTablero.descripcion=this.descripcionTablero;
+    this.tableroService.createTablero(nuevoTablero).subscribe(tableros => {
+      const lista = JSON.stringify(tableros);
+      console.log(lista);
+      this.ngOnInit();
+
+    });
+
   }
 
 }
