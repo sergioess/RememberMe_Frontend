@@ -12,6 +12,7 @@ import { ConfirmatioDelColaComponent } from './components/confirmatio-del-cola/c
 import { FormsModule } from "@angular/forms";
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { BitacoraModule } from '../bitacora/bitacora.module';
 
 
 
@@ -32,6 +33,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     FormsModule,
     MatInputModule,
     MatFormFieldModule,
+    BitacoraModule
   ]
 })
 export class TablerosModule { }
