@@ -5,6 +5,7 @@ import { HttpHeaders } from '@angular/common/http';
 import { Tablero } from '../models/tablero';
 import { Tarea } from '../models/tarea';
 import { TableroColaborador } from '../models/tablero-colaborador';
+import { NotificationUread } from '../models/notification-uread';
 
 
 
@@ -59,14 +60,25 @@ export class TablerosService {
     };
     return this.http.post(this.url + 'tablero_colaboradores/', data);
   }
+
+
+
   createTablero(data: Tablero): Observable<any> {
 
-    
+
     const httpOptions = {
       headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 
     };
     return this.http.post(this.url + 'tablero/', data);
+  }
+
+
+  updateEstadoAceptado(id: number, data: NotificationUread): Observable<any> {
+
+    console.log(JSON.stringify(data));
+
+    return this.http.put(this.url + 'tablero_colaboradores_acepta' + '/' + id, data);
   }
 
 
