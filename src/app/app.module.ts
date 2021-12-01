@@ -30,6 +30,8 @@ import { TablerosModule } from './tableros/tableros.module';
 import { RouterModule } from '@angular/router';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CategoriasServiceService } from './services/categorias-service.service';
+import { NotificationsService } from './services/notifications.service';
 
 
 @NgModule({
@@ -63,7 +65,9 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TareasServiceService,
     BitacoraService,
     UsuariosService,
-    TablerosService
+    TablerosService,
+    CategoriasServiceService,
+    NotificationsService
   ],
   entryComponents: [ConfirmationDialogComponent],
   bootstrap: [AppComponent]
