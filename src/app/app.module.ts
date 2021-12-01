@@ -13,6 +13,7 @@ import { BitacoraModule } from './bitacora/bitacora.module';
 import { AngularMaterialModule } from './angular-material/angular-material.module';
 import { CategoriasModule } from './categorias/categorias.module';
 import { UsuariosModule } from './usuarios/usuarios.module';
+import { NotificationsModule } from './notifications/notifications.module';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -30,6 +31,7 @@ import { RouterModule } from '@angular/router';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -46,6 +48,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     TablerosModule,
     BitacoraModule,
     UsuariosModule,
+    NotificationsModule,
     MatInputModule,
     MatFormFieldModule,
     FormsModule,

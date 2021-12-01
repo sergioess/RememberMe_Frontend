@@ -28,6 +28,7 @@
       <div class="row mt-2">
         <a class="btn btn-primary" (click)="logout()" *ngIf="!validaUsuarioLogueado()">Logout</a>
       </div>
+
     </div>
 
 
@@ -42,6 +43,15 @@
 
     <span>RememberMe</span>
     <span class="example-spacer"></span>
+    <div class="row mt-2 p-0">
+      <div class="col">
+        <div class="text-white" matBadge="{{ countUnreadNotifications }}" matBadgeOverlap="true"
+          *ngIf="!validaUsuarioLogueado()" class="me-3">
+          <mat-icon>notifications</mat-icon>
+        </div>
+      </div>
+
+    </div>
     <div>
 
       <a mat-button [routerLink]="'login'" class="example-icon" *ngIf="validaUsuarioLogueado()">Login</a>
@@ -49,7 +59,7 @@
     </div>
 
   </mat-toolbar>
-  <app-header></app-header>
+  <app-header (actualizarNotification)="CambiaNumNoti($event)"></app-header>
   <router-outlet></router-outlet>
 
 

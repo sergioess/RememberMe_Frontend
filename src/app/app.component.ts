@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { Usuario } from './models/usuario';
 import { Utils } from 'src/app/common/utils';
 import { UsuariosService } from './services/usuarios.service';
+import { NotificationsService } from './services/notifications.service';
 
 
 @Component({
@@ -14,10 +15,12 @@ export class AppComponent implements OnInit {
   title = 'rememberme';
 
   datosUsuario: Usuario = new Usuario();
+  countUnreadNotifications = Utils.unreadNotifications;
 
 
-
-  constructor(private router: Router, private usuarioService: UsuariosService) { }
+  constructor(private router: Router,
+    private usuarioService: UsuariosService,
+    private notificationsService: NotificationsService) { }
 
 
   ngOnInit(): void {
@@ -52,6 +55,8 @@ export class AppComponent implements OnInit {
 
       });
 
+      // this.TraeUnreadNotifications();
+
 
     }
 
@@ -65,6 +70,22 @@ export class AppComponent implements OnInit {
     this.navigate("/");
   }
 
+
+  CambiaNumNoti(cantidad: number) {
+    console.log("Dato desde hijo: " + cantidad);
+    this.countUnreadNotifications = cantidad;
+  }
+
+  TraeUnreadNotifications() {
+    console.log("Usr actual: " + Utils.currentUser.id);
+    this.notificationsService.countUnreadNotifications(22).subscribe(notifications => {
+      console.log("notifications countUnread: " + notifications);
+      const lista = JSON.stringify(notifications);
+      console.log("Lista countUnread: " + lista);
+      this.countUnreadNotifications = notifications;
+
+    });
+  }
 
   navigate(ruta: string) {
     // console.log(serie);
