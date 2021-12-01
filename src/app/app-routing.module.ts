@@ -9,6 +9,7 @@ import { LoginUsuariosComponent } from './usuarios/components/login-usuarios/log
 import { AuthGuard } from './guards/auth.guard';
 import { RegistroUsuariosComponent } from './usuarios/components/registro-usuarios/registro-usuarios.component';
 import { DetailTableroComponent } from './tableros/components/detail-tablero/detail-tablero.component';
+import { ListNotificationsComponent } from './notifications/list-notifications/list-notifications.component';
 
 const routes: Routes = [{ path: '', component: LoginUsuariosComponent },
 { path: 'tableros', component: ListaTablerosComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [{ path: '', component: LoginUsuariosComponent },
 { path: 'login', component: LoginUsuariosComponent },
 { path: 'registro', component: RegistroUsuariosComponent },
 { path: 'detalletablero', component: DetailTableroComponent },
+{ path: 'notification', component: ListNotificationsComponent },
 { path: '**', redirectTo: 'login' },
 ];
 

@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   }
 
   ActualizaNoti(id: number): void {
-    this.actualizarNotification.emit();
+    // this.actualizarNotification.emit();
 
     console.log("Id Usuario Actual" + Utils.currentUser.id)
 

@@ -1,4 +1,4 @@
-export class Notification {
+export class Notificacion {
   id: number = 0;
   id_usr_recieve: number = 0;
   id_usr_send: number = 0;

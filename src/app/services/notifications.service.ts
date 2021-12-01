@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Categoria } from '../models/categoria'
 import { Observable } from 'rxjs';
 import { HttpHeaders } from '@angular/common/http';
+import { Notificacion } from '../models/notificacion';
 
 
 @Injectable({
@@ -16,10 +16,17 @@ export class NotificationsService {
 
 
 
-  getUnreadNotifications(id_usuario: number): Observable<Notification[]> {
+  getUnreadNotifications(id_usuario: number): Observable<Notificacion[]> {
     // console.log(this.http.get<Tarea[]>(this.url + '/tareas'))
     // return this.items;
-    return this.http.get<Notification[]>(this.url + 'notificacion' + '/' + id_usuario);
+
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+
+    };
+
+    return this.http.get<Notificacion[]>(this.url + 'notificacion' + '/' + id_usuario, httpOptions);
 
   }
 
