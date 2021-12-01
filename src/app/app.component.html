@@ -60,7 +60,7 @@
 
   </mat-toolbar>
   <app-header (actualizarNotification)="CambiaNumNoti($event)"></app-header>
-  <router-outlet></router-outlet>
+  <router-outlet (actualizarNotification)="CambiaNumNoti($event)"></router-outlet>
 
 
 </mat-drawer-container>

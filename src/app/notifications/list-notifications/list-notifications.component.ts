@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { Notificacion } from '../../models/notificacion';
 import { NotificationsService } from '../../services/notifications.service';
@@ -13,11 +13,14 @@ import { TablerosService } from 'src/app/services/tableros.service';
 })
 export class ListNotificationsComponent implements OnInit {
 
+  @Output() actualizarNotification = new EventEmitter<number>();
+
   listNotifications: NotificationUread[] = [];
 
   constructor(private router: Router,
     private notificacionService: NotificationsService,
-    private tablerosService: TablerosService) { }
+    private tablerosService: TablerosService,
+    private notificationsService: NotificationsService) { }
 
   ngOnInit(): void {
     this.traerNotificaciones();
@@ -41,7 +44,10 @@ export class ListNotificationsComponent implements OnInit {
     this.cambiaAceptaTableroColaborador(item);
 
     //Llama a notificacion Leida
-    // this.notificacionLeida(item);
+    this.notificacionLeida(item);
+
+    //Actualiza contador notificaciones sin leer
+
 
     this.ngOnInit();
   }
@@ -60,13 +66,10 @@ export class ListNotificationsComponent implements OnInit {
 
   cambiaAceptaTableroColaborador(item: NotificationUread) {
 
-    const lista = JSON.stringify(item);
-    console.log("Invitacion Aceptada" + lista);
-
     this.tablerosService.updateEstadoAceptado(1, item).subscribe(tablero => {
       this.listNotifications = tablero;
       const lista = JSON.stringify(tablero);
-      console.log("Invitacion Aceptada" + lista);
+      // console.log("Invitacion Aceptada" + lista);
     });
   }
 
@@ -75,6 +78,20 @@ export class ListNotificationsComponent implements OnInit {
       this.listNotifications = notificacion;
       const lista = JSON.stringify(notificacion);
       console.log("Notificacion Leida" + lista);
+
+      this.actualizaCountNotificaciones();
+
+    });
+  }
+
+
+  actualizaCountNotificaciones() {
+    this.notificationsService.countUnreadNotifications(Utils.currentUser.id).subscribe(notifications => {
+      // console.log("notifications countUnread: " + notifications);
+      const lista = JSON.stringify(notifications);
+      console.log("Lista countUnread: " + lista);
+      // this.countUnreadNotifications = notifications;
+      this.actualizarNotification.emit(notifications);
     });
   }
 

@@ -17,6 +17,7 @@ import { CategoriaFormComponent } from '../categoria-form/categoria-form.compone
 import { UsuariosService } from '../../../services/usuarios.service';
 import { Router } from '@angular/router';
 import { Utils } from 'src/app/common/utils';
+import { ListaBitacoraComponent } from '../../../bitacora/components/lista-bitacora/lista-bitacora.component';
 
 @Component({
   selector: 'app-lista-categorias',
@@ -100,6 +101,7 @@ export class ListaCategoriasComponent implements OnInit {
       this._snackBar.open("Categoria Creada", 'Dismiss', { duration: 2000, verticalPosition: 'bottom', panelClass: ['red-snackbar'] });
       //this.navigate("categorias");
       this.traerCategorias(Utils.currentUser.id);
+
 
     });
 

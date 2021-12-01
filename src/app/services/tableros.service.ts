@@ -76,7 +76,7 @@ export class TablerosService {
 
   updateEstadoAceptado(id: number, data: NotificationUread): Observable<any> {
 
-    console.log(JSON.stringify(data));
+    // console.log("Item desde TableroService" + JSON.stringify(data));
 
     return this.http.put(this.url + 'tablero_colaboradores_acepta' + '/' + id, data);
   }
