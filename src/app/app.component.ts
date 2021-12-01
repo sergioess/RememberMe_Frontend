@@ -72,16 +72,16 @@ export class AppComponent implements OnInit {
 
 
   CambiaNumNoti(cantidad: number) {
-    console.log("Dato desde hijo: " + cantidad);
+    // console.log("Dato desde hijo: " + cantidad);
     this.countUnreadNotifications = cantidad;
   }
 
   TraeUnreadNotifications() {
-    console.log("Usr actual: " + Utils.currentUser.id);
+    // console.log("Usr actual: " + Utils.currentUser.id);
     this.notificationsService.countUnreadNotifications(22).subscribe(notifications => {
-      console.log("notifications countUnread: " + notifications);
+      // console.log("notifications countUnread: " + notifications);
       const lista = JSON.stringify(notifications);
-      console.log("Lista countUnread: " + lista);
+      // console.log("Lista countUnread: " + lista);
       this.countUnreadNotifications = notifications;
 
     });

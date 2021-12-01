@@ -42,7 +42,7 @@ export class ListaCategoriasComponent implements OnInit {
 
   ngOnInit(): void {
 
-    console.log("Esta autenticado: " + this.usuarioService.isAuthenticated())
+    // console.log("Esta autenticado: " + this.usuarioService.isAuthenticated())
 
     if (this.usuarioService.isAuthenticated()) {
       this.traerCategorias(Utils.currentUser.id);

@@ -19,12 +19,12 @@ export class HeaderComponent implements OnInit {
   ActualizaNoti(id: number): void {
     // this.actualizarNotification.emit();
 
-    console.log("Id Usuario Actual" + Utils.currentUser.id)
+    // console.log("Id Usuario Actual" + Utils.currentUser.id)
 
     this.notificationsService.countUnreadNotifications(Utils.currentUser.id).subscribe(notifications => {
-      console.log("notifications countUnread: " + notifications);
+      // console.log("notifications countUnread: " + notifications);
       const lista = JSON.stringify(notifications);
-      console.log("Lista countUnread: " + lista);
+      // console.log("Lista countUnread: " + lista);
       // this.countUnreadNotifications = notifications;
       this.actualizarNotification.emit(notifications);
 

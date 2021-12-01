@@ -14,10 +14,10 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 })
 export class ListaTablerosComponent implements OnInit {
 
-   // Datos en la ventana modal
+  // Datos en la ventana modal
   modalRef?: BsModalRef;
-  tituloTablero: string="";
-  descripcionTablero: string="";
+  tituloTablero: string = "";
+  descripcionTablero: string = "";
 
   listaTableros: Tablero[] = [];
 
@@ -43,18 +43,18 @@ export class ListaTablerosComponent implements OnInit {
     this.tableroService.getTablerosUsuario(Utils.currentUser.id).subscribe(tableros => {
       this.listaTableros = tableros;
       const lista = JSON.stringify(tableros);
-      console.log(lista);
+      // console.log(lista);
 
     });
   }
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template);
   }
-  confirm(){
-    let nuevoTablero: Tablero=new Tablero();
-    nuevoTablero.id_usuario=Utils.currentUser.id;
-    nuevoTablero.titulo=this.tituloTablero;
-    nuevoTablero.descripcion=this.descripcionTablero;
+  confirm() {
+    let nuevoTablero: Tablero = new Tablero();
+    nuevoTablero.id_usuario = Utils.currentUser.id;
+    nuevoTablero.titulo = this.tituloTablero;
+    nuevoTablero.descripcion = this.descripcionTablero;
     this.tableroService.createTablero(nuevoTablero).subscribe(tableros => {
       const lista = JSON.stringify(tableros);
       console.log(lista);
