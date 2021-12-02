@@ -49,7 +49,8 @@ export class ListaTareasComponent implements OnInit {
 
     //TODO:
     this._bitacoraRefreshService.refreshBitacora$.subscribe(valor => {
-      this.ngOnInit();
+      this.traerTareas();
+      this.traerCategorias(Utils.currentUser.id);
     })
 
   }

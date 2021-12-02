@@ -51,7 +51,7 @@ export class ListaBitacoraComponent implements OnInit {
 
     //TODO:
     this.bitacoraRefreshService.refreshBitacora$.subscribe(valor => {
-      this.ngOnInit();
+      this.traerBitacora(Utils.currentUser.id);
     })
   }
 

@@ -26,17 +26,14 @@ export class ItemTablerosComponent implements OnInit {
 
   constructor(private tareaService: TareasServiceService,
     private tablerosService: TablerosService,
-    private router: Router,
-    private _bitacoraRefreshService: BitacoraRefreshService) { }
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
     this.traerTareas();
     this.tablerosService.tableroPasaDetail = new Tablero();
 
-    //TODO:
-    this._bitacoraRefreshService.refreshBitacora$.subscribe(valor => {
-      this.ngOnInit();
-    })
+
   }
 
   traerTareas() {
