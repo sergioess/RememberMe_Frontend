@@ -19,6 +19,8 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { UsuariosService } from '../../../services/usuarios.service';
+import { NotificationsService } from '../../../services/notifications.service';
+import { Notificacion } from '../../../models/notificacion';
 
 
 
@@ -53,14 +55,15 @@ export class DetailTableroComponent implements OnInit {
     public dialog: MatDialog,
     private _bottomSheet: MatBottomSheet,
     private modalService: BsModalService,
-    private usuariosService: UsuariosService
-  ) { }
+    private usuariosService: UsuariosService,
+    private notificationService: NotificationsService) { }
 
 
   ngOnInit(): void {
     console.log("Reload: " + JSON.stringify(this.tablerosService.tableroPasaDetail));
     this.detalleTablero = this.tablerosService.tableroPasaDetail;
     console.log("Detalle Tablero" + this.detalleTablero);
+    console.log(JSON.stringify("Detalle Tablero: " + this.detalleTablero));
     this.TraeColaboradores();
 
 
@@ -77,7 +80,7 @@ export class DetailTableroComponent implements OnInit {
     this.tablerosService.getColaboradoesTablero(this.detalleTablero.id).subscribe(colaboradores => {
       this.listaColaboradores = colaboradores;
       const lista = JSON.stringify(colaboradores);
-      console.log("Lista Colaboradores" + lista);
+      // console.log("Lista Colaboradores" + lista);
 
       this.dataSource = new MatTableDataSource(this.listaColaboradores);
       this.dataSource.sort = this.sort;
@@ -117,7 +120,7 @@ export class DetailTableroComponent implements OnInit {
   }
 
   delete(id: any) {
-    console.log("El id: " + id);
+    // console.log("El id: " + id);
     const dialogRef = this.dialog.open(ConfirmatioDelColaComponent);
 
     dialogRef.afterClosed().subscribe(result => {
@@ -165,9 +168,27 @@ export class DetailTableroComponent implements OnInit {
         // const lista = JSON.stringify(tablero);
         // console.log(tareas.body.tarea);
 
+        // TODO: crea la notificacion
+        let mensaje = "Has sido invitado a participar del Tablero '" + this.detalleTablero.titulo + "' creado por @" + Utils.currentUser.username;
+        let notificacionNew: Notificacion = new Notificacion;
+        notificacionNew.id_usr_recibe = usuario.id;
+        notificacionNew.id_usr_send = Utils.currentUser.id;
+        notificacionNew.description = mensaje;
+        notificacionNew.type_notification = 1;
+        notificacionNew.id_objeto = this.detalleTablero.id;
+
+        console.log(JSON.stringify("Nueva Notificacion: " + notificacionNew));
+
+        this.notificationService.createNotificacion(notificacionNew).subscribe(notifica => {
+          const lista = JSON.stringify(notifica);
+          console.log(lista);
+        });
+
         this.ngOnInit();
 
       });
+
+      this.nuevoColaborador = "";
 
     });
 

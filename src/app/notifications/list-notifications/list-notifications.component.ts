@@ -5,6 +5,7 @@ import { NotificationsService } from '../../services/notifications.service';
 import { Utils } from '../../common/utils';
 import { NotificationUread } from '../../models/notification-uread';
 import { TablerosService } from 'src/app/services/tableros.service';
+import { NotificationBellService } from '../../services/notification-bell.service';
 
 @Component({
   selector: 'app-list-notifications',
@@ -20,7 +21,8 @@ export class ListNotificationsComponent implements OnInit {
   constructor(private router: Router,
     private notificacionService: NotificationsService,
     private tablerosService: TablerosService,
-    private notificationsService: NotificationsService) { }
+    private notificationsService: NotificationsService,
+    private _notificationBellService: NotificationBellService) { }
 
   ngOnInit(): void {
     this.traerNotificaciones();
@@ -33,6 +35,7 @@ export class ListNotificationsComponent implements OnInit {
       this.listNotifications = notificaciones;
       const lista = JSON.stringify(notificaciones);
       console.log(lista);
+
 
     });
   }
@@ -49,7 +52,7 @@ export class ListNotificationsComponent implements OnInit {
     //Actualiza contador notificaciones sin leer
 
 
-    this.ngOnInit();
+
   }
 
   rechazar(item: NotificationUread) {
@@ -59,8 +62,6 @@ export class ListNotificationsComponent implements OnInit {
 
     //Llama a notificacion Leida
     this.notificacionLeida(item);
-
-    this.ngOnInit();
 
   }
 
@@ -80,7 +81,7 @@ export class ListNotificationsComponent implements OnInit {
       console.log("Notificacion Leida" + lista);
 
       this.actualizaCountNotificaciones();
-
+      this.ngOnInit();
     });
   }
 
@@ -91,7 +92,10 @@ export class ListNotificationsComponent implements OnInit {
       const lista = JSON.stringify(notifications);
       console.log("Lista countUnread: " + lista);
       // this.countUnreadNotifications = notifications;
-      this.actualizarNotification.emit(notifications);
+      // this.actualizarNotification.emit(notifications);
+
+      this._notificationBellService.sendValor(notifications);
+      this.ngOnInit();
     });
   }
 

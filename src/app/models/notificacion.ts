@@ -1,6 +1,6 @@
 export class Notificacion {
   id: number = 0;
-  id_usr_recieve: number = 0;
+  id_usr_recibe: number = 0;
   id_usr_send: number = 0;
   description: string = '';
   type_notification: number = 0;

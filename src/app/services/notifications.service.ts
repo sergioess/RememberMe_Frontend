@@ -52,4 +52,15 @@ export class NotificationsService {
     // console.log("Actualiza" + lista);
     return this.http.put(this.url + 'notificacion' + '/' + id, httpOptions);
   }
+
+
+  createNotificacion(data: Notificacion): Observable<any> {
+
+
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+
+    };
+    return this.http.post(this.url + 'notificacion/', data);
+  }
 }

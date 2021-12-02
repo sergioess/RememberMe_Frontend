@@ -4,6 +4,7 @@ import { Usuario } from './models/usuario';
 import { Utils } from 'src/app/common/utils';
 import { UsuariosService } from './services/usuarios.service';
 import { NotificationsService } from './services/notifications.service';
+import { NotificationBellService } from './services/notification-bell.service';
 
 
 @Component({
@@ -20,10 +21,13 @@ export class AppComponent implements OnInit {
 
   constructor(private router: Router,
     private usuarioService: UsuariosService,
-    private notificationsService: NotificationsService) { }
+    private notificationsService: NotificationsService,
+    private _notificationBell: NotificationBellService) { }
 
 
   ngOnInit(): void {
+
+
     if (Utils.currentUser.id != 0) {
       // setInterval(() => {
       this.datosUsuario = Utils.currentUser;
@@ -59,6 +63,10 @@ export class AppComponent implements OnInit {
 
 
     }
+
+    this._notificationBell.countUnreadNoti$.subscribe(valor => {
+      this.countUnreadNotifications = valor;
+    })
 
 
   }

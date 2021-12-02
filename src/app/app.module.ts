@@ -32,6 +32,7 @@ import { RouterModule } from '@angular/router';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { CategoriasServiceService } from './services/categorias-service.service';
 import { NotificationsService } from './services/notifications.service';
+import { NotificationBellService } from './services/notification-bell.service';
 
 
 @NgModule({
@@ -67,7 +68,8 @@ import { NotificationsService } from './services/notifications.service';
     UsuariosService,
     TablerosService,
     CategoriasServiceService,
-    NotificationsService
+    NotificationsService,
+    NotificationBellService
   ],
   entryComponents: [ConfirmationDialogComponent],
   bootstrap: [AppComponent]
