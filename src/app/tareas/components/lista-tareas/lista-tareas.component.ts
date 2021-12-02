@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 //Proteger Rura
 import { UsuariosService } from '../../../services/usuarios.service';
 import { Router } from '@angular/router';
+import { BitacoraRefreshService } from '../../../services/bitacora-refresh.service';
 
 
 @Component({
@@ -33,7 +34,8 @@ export class ListaTareasComponent implements OnInit {
     private categoriaService: CategoriasServiceService,
     private usuarioService: UsuariosService,
     private router: Router,
-    private toastr: ToastrService) { }
+    private toastr: ToastrService,
+    private _bitacoraRefreshService: BitacoraRefreshService) { }
 
   ngOnInit(): void {
 
@@ -44,6 +46,11 @@ export class ListaTareasComponent implements OnInit {
     else {
       this.navigate("/");
     }
+
+    //TODO:
+    this._bitacoraRefreshService.refreshBitacora$.subscribe(valor => {
+      this.ngOnInit();
+    })
 
   }
 

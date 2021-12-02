@@ -10,6 +10,7 @@ import { Tablero } from '../../../models/tablero';
 import { Tarea } from '../../../models/tarea';
 import { TareasServiceService } from '../../../services/tareas-service.service';
 import { Router } from '@angular/router';
+import { BitacoraRefreshService } from '../../../services/bitacora-refresh.service';
 
 
 @Component({
@@ -25,11 +26,17 @@ export class ItemTablerosComponent implements OnInit {
 
   constructor(private tareaService: TareasServiceService,
     private tablerosService: TablerosService,
-    private router: Router) { }
+    private router: Router,
+    private _bitacoraRefreshService: BitacoraRefreshService) { }
 
   ngOnInit(): void {
     this.traerTareas();
     this.tablerosService.tableroPasaDetail = new Tablero();
+
+    //TODO:
+    this._bitacoraRefreshService.refreshBitacora$.subscribe(valor => {
+      this.ngOnInit();
+    })
   }
 
   traerTareas() {

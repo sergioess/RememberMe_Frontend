@@ -10,6 +10,7 @@ import { BitacoraService } from 'src/app/services/bitacora.service';
 import { Categoria } from 'src/app/models/categoria';
 import { CategoriasServiceService } from 'src/app/services/categorias-service.service';
 import { Utils } from '../../../common/utils';
+import { BitacoraRefreshService } from '../../../services/bitacora-refresh.service';
 
 
 
@@ -43,8 +44,13 @@ export class TareaDetailComponent implements OnInit {
   estadoActualTarea: number = 0;
   prioridadActualTarea: number = 0;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any, private dateAdapter: DateAdapter<Date>, private tareaService: TareasServiceService,
-    private router: Router, private _snackBar: MatSnackBar, private bitacoraService: BitacoraService, private categoriaService: CategoriasServiceService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+    private dateAdapter: DateAdapter<Date>,
+    private tareaService: TareasServiceService,
+    private router: Router, private _snackBar: MatSnackBar,
+    private bitacoraService: BitacoraService,
+    private categoriaService: CategoriasServiceService,
+    private _bitacoraRefreshService: BitacoraRefreshService) {
     this.dateAdapter.setLocale('es-CO'); //dd/MM/yyyy
   }
 
@@ -145,6 +151,9 @@ export class TareaDetailComponent implements OnInit {
 
 
       this.router.navigateByUrl("tareas");
+
+      //TODO:
+      this._bitacoraRefreshService.sendValor(1);
 
     });
   }

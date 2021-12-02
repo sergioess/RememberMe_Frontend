@@ -10,6 +10,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { UsuariosService } from '../../../services/usuarios.service';
 import { Router } from '@angular/router';
 import { Utils } from '../../../common/utils';
+import { BitacoraRefreshService } from '../../../services/bitacora-refresh.service';
 
 
 @Component({
@@ -28,7 +29,8 @@ export class ListaBitacoraComponent implements OnInit {
   displayedColumns: string[] = ['bcrea', 'bdes', 'titulo'];
   constructor(private bitacoraService: BitacoraService,
     private usuarioService: UsuariosService,
-    private router: Router) {
+    private router: Router,
+    private bitacoraRefreshService: BitacoraRefreshService) {
     // this.dataSource = this.listaBitacora.slice();
   }
 
@@ -46,6 +48,11 @@ export class ListaBitacoraComponent implements OnInit {
       this.navigate("/");
     }
     //Reemplazar por id del usuario
+
+    //TODO:
+    this.bitacoraRefreshService.refreshBitacora$.subscribe(valor => {
+      this.ngOnInit();
+    })
   }
 
   traerBitacora(id_usuario: number): void {

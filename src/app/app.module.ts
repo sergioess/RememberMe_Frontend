@@ -33,6 +33,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { CategoriasServiceService } from './services/categorias-service.service';
 import { NotificationsService } from './services/notifications.service';
 import { NotificationBellService } from './services/notification-bell.service';
+import { BitacoraRefreshService } from './services/bitacora-refresh.service';
 
 
 @NgModule({
@@ -69,7 +70,8 @@ import { NotificationBellService } from './services/notification-bell.service';
     TablerosService,
     CategoriasServiceService,
     NotificationsService,
-    NotificationBellService
+    NotificationBellService,
+    BitacoraRefreshService
   ],
   entryComponents: [ConfirmationDialogComponent],
   bootstrap: [AppComponent]
