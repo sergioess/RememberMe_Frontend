@@ -35,6 +35,13 @@ export class TablerosService {
 
   }
 
+  getTableroTarea(id_tablero: number): Observable<Tablero> {
+    // console.log(this.http.get<Tarea[]>(this.url + '/tareas'))
+    // return this.items;
+    return this.http.get<Tablero>(this.url + 'tablero' + '/' + id_tablero);
+
+  }
+
   removeColaborador(id: number): Observable<TableroColaborador> {
     // console.log(this.http.get<Tarea[]>(this.url + '/tareas'))
     // return this.items;

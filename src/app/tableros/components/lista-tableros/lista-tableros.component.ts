@@ -50,7 +50,7 @@ export class ListaTablerosComponent implements OnInit {
     this.tableroService.getTablerosUsuario(Utils.currentUser.id).subscribe(tableros => {
       this.listaTableros = tableros;
       const lista = JSON.stringify(tableros);
-      // console.log(lista);
+      console.log(lista);
 
     });
   }
