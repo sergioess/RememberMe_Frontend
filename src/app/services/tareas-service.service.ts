@@ -35,6 +35,10 @@ export class TareasServiceService {
     return this.http.post(this.url + 'tareas/', data);
   }
 
+  createTareaTablero(data: Tarea): Observable<any> {
+    return this.http.post(this.url + 'tareastablero/', data);
+  }
+
   getTareasCategoria(data: Tarea): Observable<Tarea[]> {
     // console.log(this.http.get<Tarea[]>(this.url + '/tareas'))
     // return this.items;

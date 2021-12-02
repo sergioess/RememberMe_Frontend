@@ -11,6 +11,7 @@ import { Categoria } from 'src/app/models/categoria';
 import { CategoriasServiceService } from 'src/app/services/categorias-service.service';
 import { Utils } from '../../../common/utils';
 import { BitacoraRefreshService } from '../../../services/bitacora-refresh.service';
+import { TablerosService } from 'src/app/services/tableros.service';
 
 
 
@@ -50,7 +51,9 @@ export class TareaDetailComponent implements OnInit {
     private router: Router, private _snackBar: MatSnackBar,
     private bitacoraService: BitacoraService,
     private categoriaService: CategoriasServiceService,
-    private _bitacoraRefreshService: BitacoraRefreshService) {
+    private _bitacoraRefreshService: BitacoraRefreshService,
+    private tablerosService: TablerosService,
+) {
     this.dateAdapter.setLocale('es-CO'); //dd/MM/yyyy
   }
 
@@ -172,6 +175,28 @@ export class TareaDetailComponent implements OnInit {
       bicacoraJustCreated = bitacora.body.tarea;
       // console.log(bicacoraJustCreated)
     });
+
+    this.tablerosService.getTableroTarea(this.datoTarea.id_tablero).subscribe(tablero => {
+  
+      const lista = JSON.stringify(tablero);
+      console.log(lista);
+      let bitacoraNew = new Bitacora();
+      bitacoraNew.descripcion = texto;
+      bitacoraNew.id_tareas = this.datoTarea.id;
+      bitacoraNew.id_usuario = tablero.id_usuario;
+      console.log(lista.id_usuario);
+      const lista2 = JSON.stringify(bitacoraNew);
+      console.log(lista2);
+      this.bitacoraService.createBitacora(bitacoraNew).subscribe(bitacora => {
+  
+        const lista = JSON.stringify(bitacora);
+        // console.log(lista);
+        let bicacoraJustCreated = new Bitacora();
+        bicacoraJustCreated = bitacora.body.tarea;
+        // console.log(bicacoraJustCreated)
+      });
+    });
+      
   }
 
 

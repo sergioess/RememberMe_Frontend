@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, TemplateRef } from '@angular/core';
 
 import { Utils } from 'src/app/common/utils';
 import { ToastrService } from 'ngx-toastr';
@@ -11,6 +11,7 @@ import { Tarea } from '../../../models/tarea';
 import { TareasServiceService } from '../../../services/tareas-service.service';
 import { Router } from '@angular/router';
 import { BitacoraRefreshService } from '../../../services/bitacora-refresh.service';
+// import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 
 
 @Component({
@@ -20,6 +21,10 @@ import { BitacoraRefreshService } from '../../../services/bitacora-refresh.servi
 })
 export class ItemTablerosComponent implements OnInit {
   @Input() item: Tablero = new Tablero();
+  tituloNuevaTarea:string="";
+  // modalRef?: BsModalRef;
+
+  // nuevaTarea: string="";
 
   listaTareas: Tarea[] = [];
 
@@ -27,7 +32,11 @@ export class ItemTablerosComponent implements OnInit {
   constructor(private tareaService: TareasServiceService,
     private tablerosService: TablerosService,
     private router: Router,
-    private _bitacoraRefreshService: BitacoraRefreshService) { }
+    private _bitacoraRefreshService: BitacoraRefreshService,
+    private bitacoraService: BitacoraService,
+
+    // private modalService: BsModalService,
+) { }
 
   ngOnInit(): void {
     this.traerTareas();
@@ -59,4 +68,46 @@ export class ItemTablerosComponent implements OnInit {
   ngOnDestroy() {
   }
 
+  tareaRapida(){
+  console.log("crear tarea");
+  let nuevaTarea = new Tarea();
+    nuevaTarea.titulo = this.tituloNuevaTarea;
+    nuevaTarea.descripcion = "";
+    nuevaTarea.id_usuario = Utils.currentUser.id;
+    nuevaTarea.id_tablero = this.item.id;
+    this.tareaService.createTareaTablero(nuevaTarea).subscribe(tareas => {
+
+      const lista = JSON.stringify(tareas);
+      // console.log(tareas.body.tarea);
+      this.tituloNuevaTarea = "";
+      // this.traerTareas();
+      let tareaJustCreated = new Tarea();
+      tareaJustCreated = tareas.body.tarea;
+      this.listaTareas.push(tareaJustCreated);
+
+      this.crearRegistroBitacora(tareaJustCreated);
+
+    });
+  }
+  crearRegistroBitacora(tareaCreada: Tarea): void {
+    let bitacoraNew = new Bitacora();
+    bitacoraNew.descripcion = "Tarea Creada";
+    bitacoraNew.id_tareas = tareaCreada.id;
+    bitacoraNew.id_usuario = Utils.currentUser.id;
+
+    this.bitacoraService.createBitacora(bitacoraNew).subscribe(bitacora => {
+
+      const lista = JSON.stringify(bitacora);
+      // console.log(lista);
+      let bicacoraJustCreated = new Bitacora();
+      bicacoraJustCreated = bitacora.body.tarea;
+      // console.log(bicacoraJustCreated)
+    });
+
+
+  // openModal(template: TemplateRef<any>) {
+  //   this.modalRef = this.modalService.show(template);
+  // }
+
+}
 }
