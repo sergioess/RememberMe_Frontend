@@ -80,7 +80,7 @@ export class AppComponent implements OnInit {
 
 
   CambiaNumNoti(cantidad: any) {
-    console.log("Dato desde hijo: " + cantidad);
+    // console.log("Dato desde hijo: " + cantidad);
     this.countUnreadNotifications = cantidad;
   }
 

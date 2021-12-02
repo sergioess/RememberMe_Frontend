@@ -53,7 +53,7 @@ export class TareaDetailComponent implements OnInit {
     private categoriaService: CategoriasServiceService,
     private _bitacoraRefreshService: BitacoraRefreshService,
     private tablerosService: TablerosService,
-) {
+  ) {
     this.dateAdapter.setLocale('es-CO'); //dd/MM/yyyy
   }
 
@@ -166,7 +166,8 @@ export class TareaDetailComponent implements OnInit {
     bitacoraNew.descripcion = texto;
     bitacoraNew.id_tareas = this.datoTarea.id;
     bitacoraNew.id_usuario = Utils.currentUser.id;
-
+    const lista = JSON.stringify(bitacoraNew);
+    console.log("Bitacora Usuario: " + lista);
     this.bitacoraService.createBitacora(bitacoraNew).subscribe(bitacora => {
 
       const lista = JSON.stringify(bitacora);
@@ -176,27 +177,33 @@ export class TareaDetailComponent implements OnInit {
       // console.log(bicacoraJustCreated)
     });
 
-    this.tablerosService.getTableroTarea(this.datoTarea.id_tablero).subscribe(tablero => {
-  
-      const lista = JSON.stringify(tablero);
-      console.log(lista);
-      let bitacoraNew = new Bitacora();
-      bitacoraNew.descripcion = texto;
-      bitacoraNew.id_tareas = this.datoTarea.id;
-      bitacoraNew.id_usuario = tablero.id_usuario;
-      console.log(lista.id_usuario);
-      const lista2 = JSON.stringify(bitacoraNew);
-      console.log(lista2);
-      this.bitacoraService.createBitacora(bitacoraNew).subscribe(bitacora => {
-  
-        const lista = JSON.stringify(bitacora);
-        // console.log(lista);
-        let bicacoraJustCreated = new Bitacora();
-        bicacoraJustCreated = bitacora.body.tarea;
-        // console.log(bicacoraJustCreated)
+    console.log("Id tablero: " + this.datoTarea.id_tablero);
+
+    if (this.datoTarea.id_tablero > 0) {
+      this.tablerosService.getTableroTarea(this.datoTarea.id_tablero).subscribe(tablero => {
+
+        const lista = JSON.stringify(tablero);
+        console.log("Busca el tablero de la tarea: " + tablero);
+        console.log("Busca el tablero de la tarea: " + lista);
+        let bitacoraNew2 = new Bitacora();
+        bitacoraNew2.descripcion = texto;
+        bitacoraNew2.id_tareas = this.datoTarea.id;
+        bitacoraNew2.id_usuario = tablero.id_usuario;
+        // console.log(tablero.id_usuario);
+        const lista2 = JSON.stringify(bitacoraNew2);
+        // console.log("Bitacora Tablero: " + lista2);
+        this.bitacoraService.createBitacora(bitacoraNew2).subscribe(bitacora => {
+
+          const lista = JSON.stringify(bitacora);
+          // console.log(lista);
+          let bicacoraJustCreated = new Bitacora();
+          bicacoraJustCreated = bitacora.body.tarea;
+          // console.log(bicacoraJustCreated)
+        });
       });
-    });
-      
+    }
+
+
   }
 
 

@@ -49,8 +49,8 @@ export class ListaTablerosComponent implements OnInit {
   traerTablerosUsr() {
     this.tableroService.getTablerosUsuario(Utils.currentUser.id).subscribe(tableros => {
       this.listaTableros = tableros;
-      const lista = JSON.stringify(tableros);
-      console.log(lista);
+      // const lista = JSON.stringify(tableros);
+      // console.log(lista);
 
     });
   }
@@ -63,8 +63,8 @@ export class ListaTablerosComponent implements OnInit {
     nuevoTablero.titulo = this.tituloTablero;
     nuevoTablero.descripcion = this.descripcionTablero;
     this.tableroService.createTablero(nuevoTablero).subscribe(tableros => {
-      const lista = JSON.stringify(tableros);
-      console.log(lista);
+      // const lista = JSON.stringify(tableros);
+      // console.log(lista);
       this.ngOnInit();
 
     });

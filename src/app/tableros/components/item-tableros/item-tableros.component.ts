@@ -64,7 +64,7 @@ export class ItemTablerosComponent implements OnInit {
   }
 
   tareaRapida() {
-    console.log("crear tarea");
+    // console.log("crear tarea");
     let nuevaTarea = new Tarea();
     nuevaTarea.titulo = this.tituloNuevaTarea;
     nuevaTarea.descripcion = "";
@@ -72,7 +72,7 @@ export class ItemTablerosComponent implements OnInit {
     nuevaTarea.id_tablero = this.item.id;
     this.tareaService.createTareaTablero(nuevaTarea).subscribe(tareas => {
 
-      const lista = JSON.stringify(tareas);
+      // const lista = JSON.stringify(tareas);
       // console.log(tareas.body.tarea);
       this.tituloNuevaTarea = "";
       // this.traerTareas();
