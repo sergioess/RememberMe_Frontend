@@ -11,17 +11,17 @@ import { RegistroUsuariosComponent } from './usuarios/components/registro-usuari
 import { DetailTableroComponent } from './tableros/components/detail-tablero/detail-tablero.component';
 import { ListNotificationsComponent } from './notifications/list-notifications/list-notifications.component';
 
-const routes: Routes = [{ path: '', component: LoginUsuariosComponent },
-{ path: 'tableros', component: ListaTablerosComponent },
-{ path: 'bitacora', component: ListaBitacoraComponent, canActivate: [AuthGuard] },
-{ path: 'categorias', component: ListaCategoriasComponent },
-{ path: 'about', component: AboutComponent },
-{ path: 'tareas', component: ListaTareasComponent },
-{ path: 'login', component: LoginUsuariosComponent },
-{ path: 'registro', component: RegistroUsuariosComponent },
-{ path: 'detalletablero', component: DetailTableroComponent },
-{ path: 'notification', component: ListNotificationsComponent },
-{ path: '**', redirectTo: 'login' },
+const routes: Routes = [
+  { path: 'tableros', component: ListaTablerosComponent },
+  { path: 'bitacora', component: ListaBitacoraComponent, canActivate: [AuthGuard] },
+  { path: 'categorias', component: ListaCategoriasComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'tareas', component: ListaTareasComponent },
+  { path: 'login', component: LoginUsuariosComponent },
+  { path: 'registro', component: RegistroUsuariosComponent },
+  { path: 'detalletablero', component: DetailTableroComponent },
+  { path: 'notification', component: ListNotificationsComponent },
+  { path: '**', redirectTo: 'login' },
 ];
 
 @NgModule({

@@ -28,7 +28,7 @@ export class ListaTablerosComponent implements OnInit {
     private _bitacoraRefreshService: BitacoraRefreshService) { }
 
   ngOnInit(): void {
-
+    console.log("entre tableros");
     if (this.usuarioService.isAuthenticated()) {
       this.traerTablerosUsr();
     }
@@ -49,8 +49,8 @@ export class ListaTablerosComponent implements OnInit {
   traerTablerosUsr() {
     this.tableroService.getTablerosUsuario(Utils.currentUser.id).subscribe(tableros => {
       this.listaTableros = tableros;
-      // const lista = JSON.stringify(tableros);
-      // console.log(lista);
+      const lista = JSON.stringify(tableros);
+      console.log(lista);
 
     });
   }

@@ -18,6 +18,7 @@ export class LoginUsuariosComponent implements OnInit {
   constructor(private usuariosService: UsuariosService, private router: Router) { }
 
   ngOnInit(): void {
+    // console.log("entre login");
   }
 
   loginIntent() {
@@ -65,6 +66,7 @@ export class LoginUsuariosComponent implements OnInit {
       sessionStorage.setItem('isLoggedIn', "true");
       sessionStorage.setItem('token', token);
       sessionStorage.setItem('user', texto);
+      localStorage.setItem('user', texto);
       this.router.navigate(["tareas"]);
 
 

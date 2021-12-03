@@ -26,7 +26,7 @@
 
       <br>
       <div class="row mt-2">
-        <a class="btn btn-primary" (click)="logout()" *ngIf="!validaUsuarioLogueado()">Logout</a>
+        <a class="btn btn-primary" (click)="logout()" *ngIf="!validaUsuarioLogueado()">Cerrar Sesión</a>
       </div>
 
     </div>
@@ -54,7 +54,7 @@
     </div>
     <div>
 
-      <a mat-button routerLink="/login" class="example-icon" *ngIf="validaUsuarioLogueado()">Login</a>
+      <a mat-button routerLink="/login" class="example-icon" *ngIf="validaUsuarioLogueado()">Iniciar</a>
 
     </div>
 

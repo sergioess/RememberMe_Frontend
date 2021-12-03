@@ -44,7 +44,7 @@ export class ListaTareasComponent implements OnInit {
       this.traerCategorias(Utils.currentUser.id);
     }
     else {
-      this.navigate("/");
+      this.navigate("login");
     }
 
     //TODO:
@@ -60,7 +60,7 @@ export class ListaTareasComponent implements OnInit {
     this.tareaService.getTareasUsuario(Utils.currentUser.id).subscribe(tareas => {
       this.listaTareas = tareas;
       const lista = JSON.stringify(tareas);
-      // console.log(lista);
+      console.log(lista);
 
     });
 
@@ -124,8 +124,8 @@ export class ListaTareasComponent implements OnInit {
 
   navigate(ruta: string) {
     // console.log(serie);
-    this.router.routeReuseStrategy.shouldReuseRoute = () => true;
-    this.router.onSameUrlNavigation = 'ignore';
+    // this.router.routeReuseStrategy.shouldReuseRoute = () => true;
+    // this.router.onSameUrlNavigation = 'ignore';
     this.router.navigate([ruta]);
   }
 
