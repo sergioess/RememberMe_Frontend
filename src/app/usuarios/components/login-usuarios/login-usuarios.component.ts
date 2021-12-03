@@ -33,7 +33,7 @@ export class LoginUsuariosComponent implements OnInit {
       // console.log("Pass BD" + usuario[0].password);
       // console.log("Pass Ingresado" + this.passwordIngresado);
 
-      if (usuario === "true") {
+      if (usuario) {
         this.login(usuario, this.correo);
       }
 

@@ -37,7 +37,7 @@
   <mat-toolbar (click)="obtubeFoco()">
     <button mat-icon-button (click)="drawer.toggle()" class="example-icon"
       aria-label="Example icon-button with menu icon">
-      <img alt="My image name" src="/assets/icono.png" width="25" height="25">
+      <img alt="My image name" src="./assets/icono.png" width="25" height="25">
     </button>
 
 
@@ -54,7 +54,7 @@
     </div>
     <div>
 
-      <a mat-button [routerLink]="'login'" class="example-icon" *ngIf="validaUsuarioLogueado()">Login</a>
+      <a mat-button routerLink="/login" class="example-icon" *ngIf="validaUsuarioLogueado()">Login</a>
 
     </div>
 
